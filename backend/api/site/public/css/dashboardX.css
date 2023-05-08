@@ -1,0 +1,91 @@
+/**
+* IMPORTAR ALGUMA FONTE PARA MINHA PAGE
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* AQUI VOU DEFINIR NO ROOT ALGUMAS CORES ou VARIÁVEIS DE COLORS */
+:root {
+    /*  OUTRAS OPÇÕES DE CORES
+    --bg--color: #1f242d;  
+    --second-bg-color: #323946;
+    --text-color: #fff;
+    --main-color: #7323d5; 
+    */
+
+    --bg--color: #2f0549;
+    --segunda-bg-color:#40004e;
+    --terceira-bg-color: #323946;
+    --text-color: #cbcbcb;
+    --main-color: #b770ff;
+}
+
+/* IMPORTANTE COLOCAR TODO CSS das TAGS HTML JUNTAS - Fica mais fácil achar  */
+html {
+    font-size: 62.5%;
+    overflow: hidden;
+}
+
+body {
+    background-color: var(--bg--color);
+    color: var(--text-color);
+    /* font-size: 1.6rem;
+    overflow: hidden; */
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 9%;
+    background: var(--bg--color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 2.7rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Noto Serif Telugu'; */
+    color: var(--text-color);
+    cursor: default;
+}
+/* .logo-project {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: default;
+} */
+
+.navbar a {
+    font-size: 1.7rem;
+    color: var(--text-color);
+    margin-left: 4rem;
+    transition: all .3s ease;
+}
+
+.navbar a:hover,
+.navbar a.ativo{
+    color: var(--main-color);
+}
+
+#menu-icone {
+    font-size: 3.6rem;
+    color: var(--text-color);
+    display: none;
+}

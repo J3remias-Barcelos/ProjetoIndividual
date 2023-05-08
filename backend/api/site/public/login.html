@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login X</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/login.css">
+
+    <!-- CHAMANDO MEU ARQUIVO JS -->
+    <script src="./js/funcoes.js"></script>
+    
+</head>
+
+<body>
+
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="./index.html" class="logo">Invest X</a>
+            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+        </div>
+
+        <i class='bx bx-menu' id="menu-icone"></i>
+
+        <div class="navbar">
+            <a href="./index.html" class="">Início</a>
+            <!-- <a href="./sobreMim.html">Sobre-mim</a> -->
+            <a href="./login.html" class="ativo">Login</a>
+            <a href="./cadastro.html">Cadastrar</a>
+        </div>
+    </header>
+
+    <!-- SITE PAGE LOGIN -->
+    <div class="login-context">
+        <div class="form">
+            <h1>Login</h1>
+            <div class="card-forms">
+                <span>Email:</span>
+                <input type="email" name="email" id="email_input" placeholder="Digite seu email">
+
+                <span>Senha:</span>
+                <input type="password" name="senha" id="senha_input" placeholder="Digite sua senha">
+
+                
+                <button class="btn-login" onclick="entrar()">Entrar</button>
+
+                <span class="cliqueAqui">
+                    Não tem uma conta? 
+                    <a href="./cadastro.html">Clique aqui</a>
+                </span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function entrar() {
+        // aguardar();
+
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            console.log("Deu falso")
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    window.location = "project.html";
+                    // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>

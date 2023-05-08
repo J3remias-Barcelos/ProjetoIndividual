@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ações</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/acoes.css">
+
+    <!-- CHAMANDO MEU ARQUIVO JS -->
+    <!-- <script src="./js/cofre.js"></script> -->
+</head>
+
+<body>
+
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="" class="logo">Invest X</a>
+            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+        </div>
+
+        <i class='bx bx-menu' id="menu-icone"></i>
+
+        <div class="navbar">
+            <a href="./project.html" class="">Controle</a>
+            <a href="./dashboardX.html">Dashboard</a>
+            <a href="./metricas.html" class="">Métricas</a>
+            <a href="./acoes.html" class="ativo">Ações</a>
+        </div>
+    </header>
+
+    <!-- PÁGINA DO SITE DAS AÇÕES -->
+
+    <main class="page-context">
+        <div class="cofre-context">
+            <h1>Ações <span class="hearts-core">&hearts;</span></h1>
+            <p>Planejando sua história</p>
+
+            <div class="inputs">
+                <h2>Simulando compra</h2>
+                <span>Código da ação:</span>
+                <input type="text" name="nome ação" placeholder="Nome da Ação" id="input_acao">
+
+                <span>Valor unitário:</span>
+                <input type="text" name="valor ação" placeholder="Valor da Ação" id="input_valorAcao">
+
+                <span>Quantidade:</span>
+                <input type="text" name="Quantidade de Ações" placeholder="Quantidade em Ações"
+                    id="input_quantidadeAcao">
+
+                <div class="buttons">
+                    <button onclick="buscarLista()" class="buttonBuscar">Buscar lista</button>
+
+                    <button onclick="verificarCalculo()" class="buttonVerificar">Verificar</button>
+                    <div id="div_result">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+<script>
+    function verificarCalculo() {
+        var nomeAcao = input_acao.value;
+        var valorUnitario = Number(input_valorAcao.value);
+        var quantidadeAcao = Number(input_quantidadeAcao.value);
+
+        if (nomeAcao === "" && valorUnitario === "" && quantidadeAcao === "") {
+            alert("Preencha todos os campos antes de continuar");
+        }
+            var resultado = (valorUnitario * quantidadeAcao).toFixed(2);
+            div_result.innerHTML = `Esse é o valor ${resultado}, que você precisa ter para comprar ${quantidadeAcao}`;
+        
+    }
+</script>

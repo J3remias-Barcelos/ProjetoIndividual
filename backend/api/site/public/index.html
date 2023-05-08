@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeremias - Portfolio</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/index.css">
+
+    <!-- IMPORTS DA API WEB-DATA-VIZ -->
+    <script src="./js/funcoes.js"></script>
+
+</head>
+<body>
+
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="#" class="logo">Invest X</a>
+            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+        </div>
+
+        <i class='bx bx-menu' id="menu-icone"></i>
+
+        <div class="navbar">
+            <a href="./index.html" class="ativo">Início</a>
+            <a href="./sobreMim.html">Sobre-mim</a>
+            <a href="./login.html">Login</a>
+            <a href="./cadastro.html">Cadastrar</a>
+        </div>
+    </header>
+
+    <!-- PÁGINA DO SITE -->
+    <section class="home" id="home-page">
+        <!-- AQUI VOU COLOCAR O TEXTO DA PÁGINA -->
+        <div class="home-content">
+            <h3>Hello, Dev's</h3>
+            <h1>Jeremias Barcelos.</h1>
+            <h3>Sou SPTecher, <span> Developer & DevOps.</span></h3>
+            <p>Bem-vindo ao meu universo, aqui você encontrará <br>muita paixão em formato de código <span class="hearts-core">&hearts;</span>
+            com projetos insanos!
+            </p>
+
+            <!-- REDES SOCIAIS -->
+            <div class="rede-social">
+                <a href="https://www.linkedin.com/in/jeremias-barcelos/"><i class='bx bxl-linkedin-square' ></i></a>
+                <a href="https://github.com/J3remias-Barcelos/"><i class='bx bxl-github' ></i></a>
+                <a href="https://www.instagram.com/jeremias_dev/"><i class='bx bxl-instagram' ></i></a>
+            </div>
+
+            <button class="btn-project" onclick="seLogar()">Projeto Invest-X</button>
+        </div>
+
+        <!-- AQUI VOU COLOCAR UMA IMAGEM LATERAL - PADRÂO PORTFOLIO -->
+        <div class="home-img">
+            <img src="./images/download-removebg-preview.jpg" alt="Jeremias">
+        </div>
+    </section>
+    
+</body>
+</html>
+
+<script>
+    function seLogar() {
+        window.location.href = "./login.html";
+    }
+</script>

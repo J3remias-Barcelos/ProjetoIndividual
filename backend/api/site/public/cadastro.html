@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro X</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/cadastro.css">
+
+    <!-- IMPORTS DO ARQUIVO NÃO JS -->
+    <script src="./js/funcoes.js"></script>
+
+    <!-- <link rel="icon" href="./assets/icon/favicon2.ico"> -->
+    <!-- <link rel="stylesheet" href="./css/estilo.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+</head>
+<body>
+
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="./index.html" class="logo">Invest X</a>
+            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+        </div>
+
+        <i class='bx bx-menu' id="menu-icone"></i>
+
+        <div class="navbar">
+            <a href="./index.html" class="">Início</a>
+            <!-- <a href="./sobreMim.html">Sobre-mim</a> -->
+            <a href="./login.html">Login</a>
+            <a href="./cadastro.html" class="ativo">Cadastrar</a>
+        </div>
+    </header>
+
+    <!-- PÁGINA DO SITE  CADASTRO -->
+    <div class="cadastro-context">
+        <div class="form">
+            <h1>Cadastro</h1>
+            <div class="card-forms">
+                <span>Nome:</span>
+                <input type="text" name="nome" id="nome_input" placeholder="Digite seu nome">
+
+                <span>Email:</span>
+                <input type="text" name="email" id="email_input" placeholder="Digite seu email">
+
+                <span>CPF:</span>
+                <input type="text" name="cpf" id="cpf_input" placeholder="Digite seu CPF">
+
+                <span>Senha:</span>
+                <input type="password" name="senha" id="senha_input" placeholder="Digite sua senha">
+
+                <!-- <span>Confirme sua senha:</span>
+                <input type="password" name="senha" id="senha" placeholder="Digite sua senha"> -->
+
+                <button class="btn-cadastro" class="botao" onclick="cadastrar()">
+                    Cadastrar
+                </button>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif" style="width: 3px; height: 3px;">
+                </div>
+
+                <div id="div_erros_login"></div>
+
+                <span class="cliqueAqui">
+                    Já tem uma conta? 
+                    <a href="./login.html">Clique aqui</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!--footer inicio-->
+    <!-- <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+            <span class="version">v1.0.0</span>
+        </div>
+    </div> -->
+    <!--footer fim-->
+
+</body>
+</html>
+
+<script>
+    function cadastrar() {
+        aguardar();
+
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = nome_input.value;
+        var emailVar = email_input.value;
+        var cpfVar = cpf_input.value;
+        var senhaVar = senha_input.value;
+        // var confirmacaoSenhaVar = confirmacao_senha_input.value;
+
+        // Verificando se os campos estão vazios
+        // confirmacaoSenhaVar == ""  <- CASO EU QUEIRA USAR CONFIRMAÇÃO
+        if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block",
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            
+            finalizarAguardar();
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                cpfServer: cpfVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

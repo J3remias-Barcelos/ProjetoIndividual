@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Finance</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/project.css">
+
+    <!-- CHAMANDO MEU ARQUIVO JS -->
+    <!-- <script src="./js/cofre.js"></script> -->
+</head>
+
+<body>
+
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="" class="logo">Invest X</a>
+            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+        </div>
+
+        <i class='bx bx-menu' id="menu-icone"></i>
+
+        <div class="navbar">
+            <a href="./project.html" class="ativo">Controle</a>
+            <a href="./dashboardX.html">Dashboard</a>
+            <a href="#">Métricas</a>
+            <a href="./acoes.html">Ações</a>
+        </div>
+    </header>
+
+    <!-- PÁGINA DO SITE DASHBOARD -->
+
+    <main class="page-context">
+        <div class="cofre-context">
+            <h1>Controle Financeiro <span>&hearts;</span></h1>
+
+            <!-- PARTE QUE VAI EXIBIR NA TELA -->
+            <div class="options">
+                <div class="entrada">
+                    Entradas: R$
+                    <span class="span-entrada">0.00</span>
+                </div>
+                <div class="saida">
+                    Saídas: R$
+                    <span class="span-saida">0.00</span>
+                </div>
+                <div class="total">
+                    Caixa: R$
+                    <span class="span-total"><b>0.00</b></span>
+                </div>
+            </div>
+
+            <!-- PARTE QUE ATRAVÉS DOS INPUTS VAI RECEBER OS VALORES, DESCRIÇÃO E TIPO -->
+            <div>
+                <div class="form-exibir">
+                    <div class="divDesc">
+                        <label for="desc">Descrição</label>
+                        <input type="text" id="desc" placeholder="Descrição">
+                    </div>
+                    <div class="divAmount">
+                        <label for="amount">Valor</label>
+                        <input type="number" id="amount" placeholder="Valor">
+                    </div>
+                    <div class="divType">
+                        <label for="type">Tipo</label>
+                        <select name="type" id="type">
+                            <option> Entrada</option>
+                            <option> Saída</option>
+                        </select>
+                    </div>
+                    <button id="btnNew">Incluir</button>
+                </div>
+
+                <div class="divTable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th class="columnAmount">Valor</th>
+                                <th class="columnType">Tipo</th>
+                                <th class="columnAction"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+// AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
+let tbody = document.querySelector("tbody");
+let descItem = document.querySelector("#desc");
+let amount = document.querySelector("#amount");
+let type = document.querySelector("#type");
+let btnNew = document.querySelector("#btnNew");
+let spanEntrada = document.querySelector(".span-entrada");
+let spanSaida = document.querySelector(".span-saida");
+let spanTotal = document.querySelector(".span-total");
+
+let items; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
+
+// AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
+btnNew.onclick = () => {
+  if (descItem.value === "" || amount.value === "" || type.value === "") {
+    return alert("Preencha todos os campos!");
+  }
+
+  // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
+  items.push({
+    desc: descItem.value,
+    amount: Math.abs(amount.value).toFixed(2),
+    type: type.value,
+  });
+
+  setItensBD();
+  carregarItens();
+
+  descItem.value = "";
+  amount.value = "";
+};
+
+function deleteItem(index) {
+  items.splice(index, 1);
+  setItensBD();
+  carregarItens();
+}
+
+function insertItem(item, index) {
+  let tr = document.createElement("tr");
+
+  tr.innerHTML = `
+    <td>${item.desc}</td>
+    <td>R$ ${item.amount}</td>
+    <td class="columnType">${
+      item.type === "Entrada"
+        ? '<i class="bx bx-check-circle"></i>'
+        : '<i class="bx bx-x-circle"></i>'
+    }</td>
+    <td class="columnAction">
+      <button class = "button-lixeira" onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
+    </td>
+  `;
+
+  tbody.appendChild(tr);
+}
+
+function carregarItens() {
+  items = getItensBD();
+  tbody.innerHTML = "";
+  items.forEach((item, index) => {
+    insertItem(item, index);
+  });
+
+  calculationSpan();
+}
+
+function calculationSpan() {
+  const valorDeEntrada = items
+    .filter((item) => item.type === "Entrada")
+    .map((transaction) => Number(transaction.amount));
+
+  const valorDeSaida = items
+    .filter((item) => item.type === "Saída")
+    .map((transaction) => Number(transaction.amount));
+
+  const totalEntrada = valorDeEntrada
+    .reduce((acc, cur) => acc + cur, 0)
+    .toFixed(2);
+
+  const totalSaida = Math.abs(
+    valorDeSaida.reduce((acc, cur) => acc + cur, 0)
+  ).toFixed(2);
+
+  const totalItems = (totalEntrada - totalSaida).toFixed(2);
+
+  spanEntrada.innerHTML = totalEntrada;
+  spanSaida.innerHTML = totalSaida;
+  spanTotal.innerHTML = totalItems;
+}
+
+// Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
+const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
+const setItensBD = () =>
+  localStorage.setItem("db_items", JSON.stringify(items));
+
+  carregarItens();
+</script>
