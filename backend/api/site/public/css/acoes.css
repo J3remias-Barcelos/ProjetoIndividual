@@ -55,6 +55,7 @@ body {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    box-shadow: 1px 0px 2px 0px var(--main-color);
 }
 
 .logo {

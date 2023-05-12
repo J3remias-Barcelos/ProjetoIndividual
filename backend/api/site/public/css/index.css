@@ -38,7 +38,8 @@ html {
 }
 
 body {
-    background-color: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     color: var(--text-color);
     /* font-size: 1.6rem;
     overflow: hidden; */
@@ -55,11 +56,13 @@ section {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    
 }
 
 .logo {

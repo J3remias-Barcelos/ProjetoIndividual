@@ -12,6 +12,9 @@ var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var medidasRouter = require("./src/routes/medidas");
+// VOU ACRESCENTAR MEU CONTROLE FINANCEIRA NO BANCO DE DADOS
+var financeiroRouter = require("./src/routes/financeiro");
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -22,7 +25,9 @@ app.use(cors());
 app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
-app.use("/medidas", medidasRouter)
+app.use("/medidas", medidasRouter);
+// MINHA ROTA PARA MEU CONTROLE FINANCEIRO
+app.use("/financeiro", financeiroRouter);
 
 app.listen(PORTA, function () {
     console.log(`Servidor do seu site já está rodando! Acesse o caminho a seguir para visualizar: http://localhost:${PORTA} \n

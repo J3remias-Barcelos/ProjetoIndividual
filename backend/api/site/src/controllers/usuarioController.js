@@ -1,4 +1,5 @@
 var usuarioModel = require("../models/usuarioModel");
+var financeiroModel = require("../models/financialiroModel");
 
 var sessoes = [];
 
@@ -66,6 +67,7 @@ function cadastrar(req, res) {
     var email = req.body.emailServer;
     var cpf = req.body.cpfServer;
     var senha = req.body.senhaServer;
+    var controleFinanceiro = req.body.financeServer;
 
     // Faça as validações dos valores
     if (nome == undefined) {
@@ -97,9 +99,45 @@ function cadastrar(req, res) {
     }
 }
 
+function cadastrarNaCarteira(req, res) {
+    var descricao = req.body.descricaoServer;
+    var valor = req.body.valorServer;
+    var saldo = req.body.saldoServer;
+    // var controleFinanceiro = req.body.financeServer;
+
+    // Faça as validações dos valores
+    if (descricao == undefined) {
+        res.status(400).send("Sua descrição está undefined!");
+    } else if (valor == undefined) {
+        res.status(400).send("Seu valor está undefined!");
+    } else if (saldo == undefined) {
+        res.status(400).send("Seu saldo está undefined!");
+    // } else if (controleFinanceiro == undefined) {
+    //     res.status(400).send("Sua senha está undefined!");
+    } else {
+
+        financeiroModel.cadastrarNaCarteira(descricao, valor, saldo)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+        }
+}
+
 module.exports = {
     entrar,
     cadastrar,
     listar,
-    testar
+    testar,
+    cadastrarNaCarteira,
 }

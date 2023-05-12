@@ -2,204 +2,295 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Finance</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Finance</title>
 
-    <!-- BoxIcons Para ter Icones na Página -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- BoxIcons Para ter Icones na Página -->
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-    <!-- FAVICON X -->
-    <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
+  <!-- FAVICON X -->
+  <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
 
-    <!-- CSS DA MINHA PAGE -->
-    <link rel="stylesheet" href="./css/project.css">
+  <!-- CSS DA MINHA PAGE -->
+  <link rel="stylesheet" href="./css/project.css">
 
-    <!-- CHAMANDO MEU ARQUIVO JS -->
-    <!-- <script src="./js/cofre.js"></script> -->
+  <!-- CHAMANDO MEU ARQUIVO JS -->
+  <!-- <script src="./js/cofre.js"></script> -->
 </head>
 
 <body>
 
-    <!-- HEADER PAGE -->
-    <header class="header">
-        <div>
-            <a href="" class="logo">Invest X</a>
-            <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+  <!-- HEADER PAGE -->
+  <header class="header">
+    <div>
+      <a href="" class="logo">Invest X</a>
+      <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+    </div>
+
+    <i class='bx bx-menu' id="menu-icone"></i>
+
+    <div class="navbar">
+      <a href="./project.html" class="ativo">Controle</a>
+      <a href="./dashboardX.html">Dashboard</a>
+      <!-- <a href="./metricas.html">Métricas</a> -->
+      <a href="./acoes.html">Ações</a>
+    </div>
+  </header>
+
+  <!-- PÁGINA DO SITE DASHBOARD -->
+
+  <main class="page-context">
+
+    <div class="cofre-contextEducacao">
+      <h1>
+        Educação Financeira
+      </h1>
+
+      <button class="button_oqueE" onclick="buttonOqueE()">Sobre</button>
+      <div id="caixa" class="">
+      </div>
+    </div>
+
+    <div class="cofre-cards">
+      <h2>Falta de Educação Financeira</h2>
+
+
+      <div class="card-container">
+
+        <div class="styleImage">
+          <span class="nameImagem">Primeira Imagem</span>
+          <img src="./assets/./imgs/semDormir.jpg">
         </div>
 
-        <i class='bx bx-menu' id="menu-icone"></i>
-
-        <div class="navbar">
-            <a href="./project.html" class="ativo">Controle</a>
-            <a href="./dashboardX.html">Dashboard</a>
-            <a href="#">Métricas</a>
-            <a href="./acoes.html">Ações</a>
+        <div class="styleImage2">
+          <span class="nameImagem">Primeira Imagem</span>
+          <img src="./assets/./imgs/pessoaPreocupada.jpeg">
         </div>
-    </header>
 
-    <!-- PÁGINA DO SITE DASHBOARD -->
-
-    <main class="page-context">
-        <div class="cofre-context">
-            <h1>Controle Financeiro <span>&hearts;</span></h1>
-
-            <!-- PARTE QUE VAI EXIBIR NA TELA -->
-            <div class="options">
-                <div class="entrada">
-                    Entradas: R$
-                    <span class="span-entrada">0.00</span>
-                </div>
-                <div class="saida">
-                    Saídas: R$
-                    <span class="span-saida">0.00</span>
-                </div>
-                <div class="total">
-                    Caixa: R$
-                    <span class="span-total"><b>0.00</b></span>
-                </div>
-            </div>
-
-            <!-- PARTE QUE ATRAVÉS DOS INPUTS VAI RECEBER OS VALORES, DESCRIÇÃO E TIPO -->
-            <div>
-                <div class="form-exibir">
-                    <div class="divDesc">
-                        <label for="desc">Descrição</label>
-                        <input type="text" id="desc" placeholder="Descrição">
-                    </div>
-                    <div class="divAmount">
-                        <label for="amount">Valor</label>
-                        <input type="number" id="amount" placeholder="Valor">
-                    </div>
-                    <div class="divType">
-                        <label for="type">Tipo</label>
-                        <select name="type" id="type">
-                            <option> Entrada</option>
-                            <option> Saída</option>
-                        </select>
-                    </div>
-                    <button id="btnNew">Incluir</button>
-                </div>
-
-                <div class="divTable">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Descrição</th>
-                                <th class="columnAmount">Valor</th>
-                                <th class="columnType">Tipo</th>
-                                <th class="columnAction"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-    
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="styleImage3">
+          <span class="nameImagem">Primeira Imagem</span>
+          <img src="./assets/./imgs/casamentoDestruido.jpeg">
         </div>
-    </main>
+      </div>
+
+    </div>
+
+
+    <div class="cofre-context">
+      <h1>Controle Financeiro <span>&hearts;</span></h1>
+
+      <!-- PARTE QUE VAI EXIBIR NA TELA -->
+      <div class="options">
+        <div class="entrada">
+          Entradas: R$
+          <span class="span-entrada">0.00</span>
+        </div>
+
+        <div class="saida">
+          Saídas: R$
+          <span class="span-saida">0.00</span>
+        </div>
+        <div class="total">
+          Caixa: R$
+          <span class="span-total"><b>0.00</b></span>
+        </div>
+      </div>
+
+      <!-- PARTE QUE ATRAVÉS DOS INPUTS VAI RECEBER OS VALORES, DESCRIÇÃO E TIPO -->
+      <div>
+        <div class="form-exibir">
+          <div class="divDesc">
+            <label for="desc">Descrição</label>
+            <input type="text" id="desc" placeholder="Descrição">
+          </div>
+          <div class="divAmount">
+            <label for="amount">Valor</label>
+            <input type="number" id="amount" placeholder="Valor">
+          </div>
+          <div class="divType">
+            <label for="type">Tipo</label>
+            <select name="type" id="type">
+              <option> Entrada</option>
+              <option> Saída</option>
+            </select>
+          </div>
+          <button id="btnNew">Incluir</button>
+        </div>
+
+        <div class="divTable">
+          <table>
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th class="columnAmount">Valor</th>
+                <th class="columnType">Tipo</th>
+                <th class="columnAction"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 
 </html>
 
 <script>
-// AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
-let tbody = document.querySelector("tbody");
-let descItem = document.querySelector("#desc");
-let amount = document.querySelector("#amount");
-let type = document.querySelector("#type");
-let btnNew = document.querySelector("#btnNew");
-let spanEntrada = document.querySelector(".span-entrada");
-let spanSaida = document.querySelector(".span-saida");
-let spanTotal = document.querySelector(".span-total");
+  // EDUCAÇÃO FINANCEIRA - Puxar Botão
+  function buttonOqueE() {
+    caixa.innerHTML =
+      `
+      <div class="div_p">
+      Na prática, educação financeira é o conjunto de todos os aprendizados sobre como gerir bem as finanças. Mais
+      do que apenas poupar, educação financeira é sobre saber como utilizar o dinheiro ou salário recebido,
+      planejando, calculando e tomando decisões certeiras, que não vão impactar negativamente o bolso.
+      </div>
+      `
+  }
+  // EDUCAÇÃO FINANCEIRA - Fechar Botão
+ 
 
-let items; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
+  // AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
+  let tbody = document.querySelector("tbody");
+  let descItem = document.querySelector("#desc");
+  let amount = document.querySelector("#amount");
+  let type = document.querySelector("#type");
+  let btnNew = document.querySelector("#btnNew");
+  let spanEntrada = document.querySelector(".span-entrada");
+  let spanSaida = document.querySelector(".span-saida");
+  let spanTotal = document.querySelector(".span-total");
 
-// AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
-btnNew.onclick = () => {
-  if (descItem.value === "" || amount.value === "" || type.value === "") {
-    return alert("Preencha todos os campos!");
+  let items; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
+
+  // AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
+  btnNew.onclick = () => {
+    if (descItem.value === "" || amount.value === "" || type.value === "") {
+      return alert("Preencha todos os campos!");
+    }
+
+    // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
+    items.push({
+      desc: descItem.value,
+      amount: Math.abs(amount.value).toFixed(2),
+      type: type.value,
+    });
+
+    setItensBD();
+    carregarItens();
+
+    descItem.value = "";
+    amount.value = "";
+
+    // Enviando o valor da nova input
+    fetch("/financeio/cadastrarNaCarteira", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                financeServer : financeVar,
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+                cardErro.style.display = "block";
+
+                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                setTimeout(() => {
+                    window.location = "login.html";
+                }, "2000")
+
+                limparFormulario();
+                finalizarAguardar();
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+  };
+
+  function deleteItem(index) {
+    items.splice(index, 1);
+    setItensBD();
+    carregarItens();
   }
 
-  // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
-  items.push({
-    desc: descItem.value,
-    amount: Math.abs(amount.value).toFixed(2),
-    type: type.value,
-  });
+  function insertItem(item, index) {
+    let tr = document.createElement("tr");
 
-  setItensBD();
-  carregarItens();
-
-  descItem.value = "";
-  amount.value = "";
-};
-
-function deleteItem(index) {
-  items.splice(index, 1);
-  setItensBD();
-  carregarItens();
-}
-
-function insertItem(item, index) {
-  let tr = document.createElement("tr");
-
-  tr.innerHTML = `
+    tr.innerHTML = `
     <td>${item.desc}</td>
     <td>R$ ${item.amount}</td>
-    <td class="columnType">${
-      item.type === "Entrada"
+    <td class="columnType">${item.type === "Entrada"
         ? '<i class="bx bx-check-circle"></i>'
         : '<i class="bx bx-x-circle"></i>'
-    }</td>
+      }</td>
     <td class="columnAction">
       <button class = "button-lixeira" onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
     </td>
   `;
 
-  tbody.appendChild(tr);
-}
+    tbody.appendChild(tr);
+  }
 
-function carregarItens() {
-  items = getItensBD();
-  tbody.innerHTML = "";
-  items.forEach((item, index) => {
-    insertItem(item, index);
-  });
+  function carregarItens() {
+    items = getItensBD();
+    tbody.innerHTML = "";
+    items.forEach((item, index) => {
+      insertItem(item, index);
+    });
 
-  calculationSpan();
-}
+    calculationSpan();
+  }
 
-function calculationSpan() {
-  const valorDeEntrada = items
-    .filter((item) => item.type === "Entrada")
-    .map((transaction) => Number(transaction.amount));
+  function calculationSpan() {
+    const valorDeEntrada = items
+      .filter((item) => item.type === "Entrada")
+      .map((transaction) => Number(transaction.amount));
 
-  const valorDeSaida = items
-    .filter((item) => item.type === "Saída")
-    .map((transaction) => Number(transaction.amount));
+    const valorDeSaida = items
+      .filter((item) => item.type === "Saída")
+      .map((transaction) => Number(transaction.amount));
 
-  const totalEntrada = valorDeEntrada
-    .reduce((acc, cur) => acc + cur, 0)
-    .toFixed(2);
+    const totalEntrada = valorDeEntrada
+      .reduce((acc, cur) => acc + cur, 0)
+      .toFixed(2);
 
-  const totalSaida = Math.abs(
-    valorDeSaida.reduce((acc, cur) => acc + cur, 0)
-  ).toFixed(2);
+    const totalSaida = Math.abs(
+      valorDeSaida.reduce((acc, cur) => acc + cur, 0)
+    ).toFixed(2);
 
-  const totalItems = (totalEntrada - totalSaida).toFixed(2);
+    const totalItems = (totalEntrada - totalSaida).toFixed(2);
 
-  spanEntrada.innerHTML = totalEntrada;
-  spanSaida.innerHTML = totalSaida;
-  spanTotal.innerHTML = totalItems;
-}
+    spanEntrada.innerHTML = totalEntrada;
+    spanSaida.innerHTML = totalSaida;
+    spanTotal.innerHTML = totalItems;
+  }
 
-// Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-const setItensBD = () =>
-  localStorage.setItem("db_items", JSON.stringify(items));
+  // Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
+  const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
+  const setItensBD = () =>
+    localStorage.setItem("db_items", JSON.stringify(items));
 
   carregarItens();
+
+
+    // function sumirMensagem() {
+    //     cardErro.style.display = "none"
+    // }
 </script>
