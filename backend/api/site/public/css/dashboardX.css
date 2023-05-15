@@ -11,7 +11,6 @@
     text-decoration: none;
     border: none;
     outline: none;
-    scroll-behavior: smooth;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -34,7 +33,6 @@
 /* IMPORTANTE COLOCAR TODO CSS das TAGS HTML JUNTAS - Fica mais fácil achar  */
 html {
     font-size: 62.5%;
-    overflow: hidden;
 }
 
 body {
@@ -90,3 +88,107 @@ body {
     color: var(--text-color);
     display: none;
 }
+
+.navigation {
+    margin-top: 8rem;
+    position: relative;
+    height: 71.5rem;
+    background: var(--text-color);
+    width: 70px;
+    box-shadow: 10px 0 0 var(--main-color);
+    border-left: 10px solid var(--text-color);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.navigation:hover {
+    width: 300px;
+}
+
+.navigation ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-left: 5px;
+    padding-top: 30px;
+}
+
+.navigation ul li {
+    position: relative;
+    list-style: none;
+    width: 100%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}
+
+.navigation ul li a {
+    position: relative;
+    display: flex;
+    width: 100%;
+    text-decoration: none;
+    color: var(--bg--color);
+}
+
+.navigation ul li a .icon {
+    position: relative;
+    display: block;
+    min-width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 85px;
+}
+
+.navigation ul li a .icon i {
+    position: relative;
+    font-size: 2rem;
+    z-index: 1;
+}
+
+.navigation ul li a .title {
+    position: relative;
+    display: block;
+    font-size: 2rem;
+    text-align: center;
+    padding: 10px;
+    height: 60px;
+    line-height: 60px;
+    white-space: nowrap;
+}
+
+.navigation ul li.active {
+    background: var(--main-color);
+}
+
+.navigation ul li.active a::before{
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--text-color);
+    border-radius: 50%;
+    box-shadow: 15px 15px 0 var(--main-color);
+}
+
+.navigation ul li.active a::after{
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--text-color);
+    border-radius: 50%;
+    box-shadow: 15px -15px 0 var(--main-color);
+}
+
+
+
+
+
+
+
+

@@ -59,12 +59,54 @@
 
       <div class="card-container">
 
-        <div class="styleImage">
-          <span class="nameImagem">Primeira Imagem</span>
-          <img src="./assets/./imgs/semDormir.jpg">
+        <div class="sliderStyle">
+          <div class="slides">
+            <!-- RADIO BUTTONS-->
+            <input type="radio" class="radio-btn" id="radio1">
+            <input type="radio" class="radio-btn" id="radio2">
+            <input type="radio" class="radio-btn" id="radio3">
+            <input type="radio" class="radio-btn" id="radio4">
+            <!-- FIM RADIO BUTTONS-->
+
+            <!-- SLIDES IMAGES -->
+            <div class="slide first">
+              <img src="./assets/./imgs/semDormir.jpg">
+            </div>
+
+            <div class="slide">
+              <img src="./assets/./imgs/pessoaPreocupada.jpeg">
+            </div>
+
+            <div class="slide">
+              <img src="./assets/./imgs/casamentoDestruido.jpeg">
+            </div>
+
+            <div class="slide">
+              <img src="./assets/./imgs/casamentoDestruido.jpeg">
+            </div>
+            <!-- FIM DO SLIDES IMAGES -->
+
+            <!-- NAVIGATION AUTO - Bolinhas de Navegação -->
+            <div class="navigation-auto">
+              <div class="auto-btn1"></div>
+              <div class="auto-btn2"></div>
+              <div class="auto-btn3"></div>
+              <div class="auto-btn4"></div>
+            </div>
+
+          </div>
+
+          <div class="manual-navigation">
+            <label for="radio1" class="manual-btn"></label>
+            <label for="radio2" class="manual-btn"></label>
+            <label for="radio3" class="manual-btn"></label>
+            <label for="radio4" class="manual-btn"></label>
+
+          </div>
+
         </div>
 
-        <div class="styleImage2">
+        <!-- <div class="styleImage2">
           <span class="nameImagem">Primeira Imagem</span>
           <img src="./assets/./imgs/pessoaPreocupada.jpeg">
         </div>
@@ -72,7 +114,8 @@
         <div class="styleImage3">
           <span class="nameImagem">Primeira Imagem</span>
           <img src="./assets/./imgs/casamentoDestruido.jpeg">
-        </div>
+        </div> -->
+
       </div>
 
     </div>
@@ -154,22 +197,40 @@
       `
   }
   // EDUCAÇÃO FINANCEIRA - Fechar Botão
- 
+
+  // SLIDER QUE SE MOVIMENTA
+  var count = 1;
+  document.getElementById("radio1").checked = true;
+
+  setInterval ( function () {
+    nextImage();
+    }, 5000);
+  
+    function nextImage() {
+      count++;
+      if (count > 4) {
+        count = 1;
+    }
+    document.getElementById("radio" + count).checked = true;
+  }
 
   // AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
-  let tbody = document.querySelector("tbody");
-  let descItem = document.querySelector("#desc");
-  let amount = document.querySelector("#amount");
-  let type = document.querySelector("#type");
-  let btnNew = document.querySelector("#btnNew");
-  let spanEntrada = document.querySelector(".span-entrada");
-  let spanSaida = document.querySelector(".span-saida");
-  let spanTotal = document.querySelector(".span-total");
+  var tbody = document.querySelector("tbody");
+  var descItem = document.querySelector("#desc");
+  var amount = document.querySelector("#amount");
+  var type = document.querySelector("#type");
+  var btnNew = document.querySelector("#btnNew");
+  var spanEntrada = document.querySelector(".span-entrada");
+  var spanSaida = document.querySelector(".span-saida");
+  var spanTotal = document.querySelector(".span-total");
 
-  let items; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
+  var items = []; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
 
   // AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
   btnNew.onclick = () => {
+    console.log(descItem)
+    console.log(amount)
+
     if (descItem.value === "" || amount.value === "" || type.value === "") {
       return alert("Preencha todos os campos!");
     }
@@ -184,44 +245,22 @@
     setItensBD();
     carregarItens();
 
-    descItem.value = "";
-    amount.value = "";
-
     // Enviando o valor da nova input
-    fetch("/financeio/cadastrarNaCarteira", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                financeServer : financeVar,
-            })
-        }).then(function (resposta) {
+    fetch("/financeiro/inserirCalculo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/financeiro.js
 
-            console.log("resposta: ", resposta);
+        descricaoServer: items[items.length - 1].desc,
+        valorServer: items[items.length - 1].amount,
+        // tipo: type
 
-            if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000")
-
-                limparFormulario();
-                finalizarAguardar();
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
-        });
-
-        return false;
+      })
+    })
   };
 
   function deleteItem(index) {
@@ -284,13 +323,8 @@
 
   // Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
   const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-  const setItensBD = () =>
-    localStorage.setItem("db_items", JSON.stringify(items));
+  const setItensBD = () => localStorage.setItem("db_items", JSON.stringify(items));
 
   carregarItens();
 
-
-    // function sumirMensagem() {
-    //     cardErro.style.display = "none"
-    // }
 </script>

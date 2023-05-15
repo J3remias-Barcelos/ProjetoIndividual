@@ -158,3 +158,10 @@ body {
 .card-forms .cliqueAqui a:hover {
     color: var(--main-color);
 }
+
+#mensagem_erro {
+    font-size: 1.1rem;
+    color: var(--main-color);
+    font-weight: bold;
+    text-align: center;
+}

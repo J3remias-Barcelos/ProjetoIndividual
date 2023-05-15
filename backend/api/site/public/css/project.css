@@ -53,7 +53,7 @@ body {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    box-shadow: 1px 0px 2px 0px var(--main-color);
+    -
 }
 
 .logo {
@@ -163,7 +163,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 45rem;
+    height: 50rem;
 }
 
 
@@ -175,58 +175,112 @@ body {
 
 .card-container img {
     width: 20rem;
-    height: 25rem;
+    height: 30rem;
     border-radius: 10px;
 }
 
-.styleImage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 28rem;
-    height: 32rem;
-    margin: 15px;
-    background-color: var(--text-color);
-    color: var(--bg--color);
-    border-radius: 1.5rem;
-    box-shadow: 0px 5px 10px 5px var(--bg--color);
+.sliderStyle {
+   margin: 0 auto;
+   width: 800px;
+   height: 400px;
+   overflow: hidden;
 }
 
-.styleImage2 {
+.slides {
+    width: 400%;
+    height: 300px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 28rem;
-    height: 32rem;
-    margin: 15px;
-    background-color: var(--text-color);
-    color: var(--bg--color);
-    border-radius: 1.5rem;
-    box-shadow: 0px 5px 10px 5px var(--bg--color);
 }
 
-.styleImage3 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 28rem;
-    height: 32rem;
-    margin: 15px;
-    background-color: var(--text-color);
-    color: var(--bg--color);
-    border-radius: 1.5rem;
-    box-shadow: 0px 5px 10px 5px var(--bg--color);
+.slides input {
+    display: none;
+}
+.slide {
+    width: 25%;
+    position: relative;
 }
 
-.nameImagem {
-    font-size: 1rem;
-    font-weight: 500;
-    text-align: center;
-    margin-top: 5
+.slide img {
+    width: 800px;
 }
+
+.manual-navigation {
+    position: absolute;
+    width: 800px;
+    margin-top: -40px;
+    display: flex;
+    justify-content: center;
+}
+
+.manual-btn {
+    border: 2px solid var(--bg--color);
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.manual-btn:not(:last-child) {
+    margin-right: 40px;
+}
+
+.manual-btn:hover {
+    background-color: var(--segunda-bg-color);
+}
+
+#radio1:checked ~ .first {
+    margin-left: 0;
+}
+
+#radio2:checked ~ .first {
+    margin-left: -25%;
+}
+
+#radio3:checked ~ .first {
+    margin-left: -50%;
+}
+
+#radio4:checked ~ .first {
+    margin-left: -75%;
+}
+
+.navigation-auto div {
+    border: 2px solid blue;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.navigation-auto {
+    position: absolute;
+    width: 800px;
+    margin-top: 260px;
+    display: flex;
+    justify-content: center;
+}
+
+.navigation-auto div:not(:last-child) {
+    margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1 {
+    background-color: var(--segunda-bg-color);
+}
+
+#radio2:checked ~ .navigation-auto .auto-btn2 {
+    background-color: var(--segunda-bg-color);
+}
+
+#radio3:checked ~ .navigation-auto .auto-btn3 {
+    background-color: var(--segunda-bg-color);
+}
+
+#radio4:checked ~ .navigation-auto .auto-btn4 {
+    background-color: var(--segunda-bg-color);
+}
+
+
 
 
 /* PARTE DO SITE QUE FICA O CONTROLE FINANCEIRO */
