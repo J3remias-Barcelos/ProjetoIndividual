@@ -53,7 +53,7 @@ body {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    -
+    box-shadow: 1px 0px 2px 0px var(--main-color);
 }
 
 .logo {
@@ -164,6 +164,7 @@ body {
     justify-content: flex-start;
     align-items: center;
     height: 50rem;
+    box-shadow: 1px 0px 2px 0px var(--main-color);
 }
 
 
@@ -280,185 +281,26 @@ body {
     background-color: var(--segunda-bg-color);
 }
 
-
-
-
-/* PARTE DO SITE QUE FICA O CONTROLE FINANCEIRO */
-
-.page-context .cofre-context {
-    padding: 5rem;
+.grafico {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0px 1px 2px var(--main-color);
+    justify-content: space-around;
+    width: 50rem;
+    height: 35rem;
+    margin: 0rem 0rem 1rem 0rem;
 }
 
-.page-context h1 {
-    font-size: 4rem;
+.grafico-container {
+    width: 50rem;
+    height: 35rem;
+    margin: 3rem;
+}
+
+.grafico-container h3 {
+    font-size: 1.8rem;
     font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 2rem;
 }
 
-
-.page-context .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 2.3rem;
-    color: var(--text-color);
-    padding: 1rem 1rem;
-    box-shadow: 0px 0px 3px var(--main-color);
+.grafico-container p {
+    font-size: 1.2rem;
 }
 
-.options .entrada {
-    margin-right: 2rem;
-    cursor: pointer;
-}
-
-.options .saida {
-    margin-right: 2rem;
-    cursor: pointer;
-}
-
-.span-entrada {
-    color: #00C9A7;
-}
-
-.span-saida {
-    color: #FF3F34;
-}
-
-.span-total {
-    color: var(--main-color);
-    font-weight: 500;
-    
-}
-
-
-.form-exibir {
-    display: flex;
-    gap: 10px;
-    align-items: end;
-    width: 100%;
-    font-size: 2.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.form-exibir input {
-    width: 100%;
-    height: 34px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-}
-
-.form-exibir #type {
-    width: 100%;
-    height: 34px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-}
-
-.form-exibir .divDesc {
-    margin-top: 23px;
-}
-
-.divDesc,
-.divType,
-.divAmount {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-exibir > button {
-    background-color: var(--main-color);
-    color: var(--bg--color);
-    border: none;
-    padding: 0 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    height: 34px;
-}
-
-.form-exibir > button:hover {
-    background-color: var(--terceira-bg-color);
-    color: var(--text-color);
-    border: var(--bg--color);
-}
-
-input,
-select {
-    padding: 5px;
-}
-
-.divTable {
-    width: 70rem;
-    height: 30rem;
-    font-size: 2rem;
-    margin: 10px 0px 0px 0px;
-    justify-content: center;
-    align-items: center;
-}
-
-table {
-    flex-direction: column-reverse;
-    width: 100%;
-    padding: 20px 10px 0px 10px;
-    border-radius: 5px;
-}
-
-table tr {
-    width: 80px;
-    height: 5rem;
-    font-size: 2rem;
-    color: var(--text-color);
-    box-shadow: 0px 0px 3px var(--main-color);
-}
-
-th {
-    text-align: start;
-    border-bottom: inset;
-    padding: 5px;
-}
-
-i {
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-
-.button-lixeira{
-    background: transparent;
-}
-
-.bx-check-circle {
-    color: #00C9A7;
-}
-
-.bx-x-circle {
-    color: #FF3F34;
-}
-
-.columnAction {
-    width: 40px;
-    text-align: center;
-}
-
-.bx-trash {
-    color: var(--main-color);
-    background-color: var(--bg--color);
-}
-
-.columnAmount>button {
-    background: transparent;
-    border: none;
-}
-
-.columnAmount {
-    width: 30%;
-}
-
-.columnType {
-    width: 80px;
-    text-align: center;
-}

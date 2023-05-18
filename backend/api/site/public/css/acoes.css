@@ -38,7 +38,8 @@ html {
 }
 
 body {
-    background-color: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     color: var(--text-color);
     /* font-size: 1.6rem;
     overflow: hidden; */
@@ -50,7 +51,8 @@ body {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -91,6 +93,12 @@ body {
     display: none;
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 .page-context .cofre-context {
     padding: 10rem;
     display: flex;
@@ -112,6 +120,84 @@ body {
 }
 
 .page-context .inputs {
+    width: 35rem;
+    height: 35rem;
+    margin: 1rem 0rem 1rem 0rem;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--text-color);
+    color: var(--bg--color);
+    border-radius: 12px;
+    box-shadow: 6px 5px var(--terceira-bg-color);
+}
+
+.inputs h2 {
+    font-size: 26px;
+    margin: 0px 0px 5px 0px;
+}
+
+input {
+    width: 19rem;
+    height: 3rem;
+    border-radius: 7px;
+    font-size: 13px;
+    border: var(--bg--color);
+}
+
+.buttons {
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttonVerificar {
+    margin-top: 1rem;
+    width: 9rem;
+    height: 3.3rem;
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--bg--color);
+    border-radius: 6px;
+    box-shadow: 3px 3px var(--terceira-bg-color);
+}
+
+.buttonBuscar {
+    margin-top: 1rem;
+    width: 10rem;
+    height: 3.3rem;
+    font-size: 15px;
+    color: var(--text-color);
+    background-color: var(--bg--color);
+    border-radius: 6px;
+    box-shadow: 3px 3px var(--terceira-bg-color);
+}
+
+/* CONTEXTO DOIS */
+
+.page-context2 .cofre-context2 {
+    padding: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.page-context2 h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.page-context2 p {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text-color);
+}
+
+.page-context2 .inputs {
     width: 35rem;
     height: 35rem;
     margin: 1rem 0rem 1rem 0rem;

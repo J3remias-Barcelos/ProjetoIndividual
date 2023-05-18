@@ -13,6 +13,9 @@
     <!-- FAVICON X -->
     <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
 
+    <!-- CANVAS PARA EXIBIR O GRÁFICO -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- CSS DA MINHA PAGE -->
     <link rel="stylesheet" href="./css/dashboardX.css">
 
@@ -28,12 +31,14 @@
         </div>
 
         <div class="navbar">
-            <a href="./project.html">Controle</a>
+            <a href="./project.html">Educação</a>
             <a href="./dashboardX.html" class="ativo">Dashboard</a>
-            <a href="./acoes.html">Ações</a>
         </div>
     </header>
 
+    <!-- MAIN PAGE -->
+    <main class="page-context">
+        
     <!-- PÁGINA DO SITE DASHBOARD -->
         <div class="navigation">
             <ul>
@@ -50,7 +55,7 @@
                     </a>
                 </li>
                 <li class="list">
-                    <a  href="#">
+                    <a href="./acoes.html">
                         <span class="icon"><i class='bx bxs-landmark'></i></span>
                         <span class="title">Ações</span>
                     </a>
@@ -62,7 +67,7 @@
                     </a>
                 </li>
                 <li class="list">
-                    <a  href="#">
+                    <a  href="./index.html">
                         <span class="icon"><i class='bx bx-exit'></i></span>
                         <span class="title">Sair</span>
                     </a>
@@ -71,8 +76,82 @@
         </div>
     
 
-    
+        <div class="cofre-context">
+            <h1>Controle Financeiro <span>&hearts;</span></h1>
+      
+            <!-- PARTE QUE VAI EXIBIR NA TELA -->
+            <div class="options">
+              <div class="entrada">
+                Entradas: R$
+                <span class="span-entrada">0.00</span>
+              </div>
+      
+              <div class="saida">
+                Saídas: R$
+                <span class="span-saida">0.00</span>
+              </div>
+              <div class="total">
+                Caixa: R$
+                <span class="span-total"><b>0.00</b></span>
+              </div>
+            </div>
+      
+            <!-- PARTE QUE ATRAVÉS DOS INPUTS VAI RECEBER OS VALORES, DESCRIÇÃO E TIPO -->
+            <div>
+              <div class="form-exibir">
+                <div class="divDesc">
+                  <label for="desc">Descrição</label>
+                  <input type="text" id="desc" placeholder="Descrição">
+                </div>
+                <div class="divAmount">
+                  <label for="amount">Valor</label>
+                  <input type="number" id="amount" placeholder="Valor">
+                </div>
+                <div class="divType">
+                  <label for="type">Tipo</label>
+                  <select name="type" id="type">
+                    <option> Entrada</option>
+                    <option> Saída</option>
+                  </select>
+                </div>
+                <button id="btnNew">Incluir</button>
+              </div>
+      
+              <div class="divTable">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Descrição</th>
+                      <th class="columnAmount">Valor</th>
+                      <th class="columnType">Tipo</th>
+                      <th class="columnAction"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+      
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
+            <div class="graficos">
+
+              
+              <div class="grafico-container">
+                <h2>Gráfico Receita Vs Dispesa</h2>
+                <canvas id="chartAnalytics"></canvas>
+              </div>
+
+                <div class="grafico-container">
+                  <h2>Porcentagem da Carteira</h2>
+                  <canvas id="chartAnalytics2"></canvas>
+              </div>
+            </div>
+          </div>
+
+        </main>
+
+        <script src="./js/cofre.js"></script>
 </body>
 
 </html>
@@ -87,5 +166,53 @@
         list.forEach((item) =>
         item.addEventListener('click', activeLink));
     
+
+
+  const ctxAnalytics = document.getElementById('chartAnalytics');
+  new Chart(ctxAnalytics, {
+    type: "line",
+    data: {
+      labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
+        "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00",
+      ],
+      datasets: [
+        {
+          label: "Sala de reunião - 12º Andar",
+          data: [
+            900, 900, 850, 900, 900, 850, 900, 900, 900, 850, 900, 850, 900,
+            900, 900, 850, 900, 900, 900, 900, 850, 900, 900, 900,
+          ],
+          borderWidth: 1,
+          backgroundColor: "rgb(235, 155, 13)",
+          borderColor: "rgb(235, 155, 13)",
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+
+  const ctxAnalytics2 = document.getElementById('chartAnalytics2');
+  new Chart(ctxAnalytics2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Pessoas que não dorme', 'Pessoas que consegui dormir'],
+      datasets: [{
+        label: 'Gráfico de pessoas que não dormem',
+        data: [83, 17],
+        backgroundColor: [
+        'rgb(85, 42, 124, 44)',
+          'rgb(40,243,174)',
+        ],
+        borderWidth: 1,
+        hoverOffset: 4
+      }]
+    },
+  });
 
 </script>

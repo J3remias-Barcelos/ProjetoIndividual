@@ -33,28 +33,29 @@
 
         <div class="navbar">
             <a href="./project.html" class="">Controle</a>
-            <a href="./dashboardX.html">Dashboard</a>
-            <!-- <a href="./metricas.html" class="">Métricas</a> -->
-            <a href="./acoes.html" class="ativo">Ações</a>
+            <a href="./dashboardX.html" class="ativo">Dashboard</a>
+
         </div>
     </header>
 
     <!-- PÁGINA DO SITE DAS AÇÕES -->
 
-    <main class="page-context">
+    <div class="container">
+
+        <main class="page-context">
         <div class="cofre-context">
-            <h1>Ações <span class="hearts-core">&hearts;</span></h1>
-            <p>Planejando sua história</p>
+            <h1>Lista de ações<span class="hearts-core">&hearts;</span></h1>
+            <p>Para comprar em breve</p>
 
             <div class="inputs">
-                <h2>Simulando compra</h2>
-                <span>Código da ação:</span>
-                <input type="text" name="nome ação" placeholder="Nome da Ação" id="input_acao">
+                <h2>Princípais ações</h2>
+                <span>Confira qual os códigos</span>
+                <input type="text" name="nome ação" placeholder="Código da Ação (nome)" id="input_acao">
 
-                <span>Valor unitário:</span>
+                <span>Valores por unidade</span>
                 <input type="text" name="valor ação" placeholder="Valor da Ação" id="input_valorAcao">
 
-                <span>Quantidade:</span>
+                <span>Setor</span>
                 <input type="text" name="Quantidade de Ações" placeholder="Quantidade em Ações"
                     id="input_quantidadeAcao">
 
@@ -68,8 +69,41 @@
                 </div>
             </div>
         </div>
-    </main>
+        </main>
+
+
+        <main class="page-context2">
+            <div class="cofre-context2">
+                <h1>Ações <span class="hearts-core">&hearts;</span></h1>
+                <p>Planejando sua história</p>
+
+                <div class="inputs">
+                    <h2>Simulando compra</h2>
+                    <span>Código da ação:</span>
+                    <input type="text" name="nome ação" placeholder="Nome da Ação" id="input_acao">
+
+                    <span>Valor unitário:</span>
+                    <input type="text" name="valor ação" placeholder="Valor da Ação" id="input_valorAcao">
+
+                    <span>Quantidade:</span>
+                    <input type="text" name="Quantidade de Ações" placeholder="Quantidade em Ações"
+                        id="input_quantidadeAcao">
+
+                    <div class="buttons">
+                        <button onclick="buscarLista()" class="buttonBuscar">Buscar lista</button>
+
+                        <button onclick="verificarCalculo()" class="buttonVerificar">Verificar</button>
+                        <div id="div_result">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
 </body>
+
 </html>
 <script>
     function verificarCalculo() {
@@ -80,8 +114,8 @@
         if (nomeAcao === "" && valorUnitario === "" && quantidadeAcao === "") {
             alert("Preencha todos os campos antes de continuar");
         }
-            var resultado = (valorUnitario * quantidadeAcao).toFixed(2);
-            div_result.innerHTML = `Esse é o valor ${resultado}, que você precisa ter para comprar ${quantidadeAcao}`;
-        
+        var resultado = (valorUnitario * quantidadeAcao).toFixed(2);
+        div_result.innerHTML = `Esse é o valor ${resultado}, que você precisa ter para comprar ${quantidadeAcao}`;
+
     }
 </script>

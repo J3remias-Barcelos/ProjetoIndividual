@@ -1,204 +1,113 @@
-// AQUI É O ARQUIVO QUE FIZ E ESTÁ FUNCIONANDO 
-const tbody = document.querySelector("tbody");
-const descItem = document.querySelector("#desc");
-const amount = document.querySelector("#amount");
-const type = document.querySelector("#type");
-const btnNew = document.querySelector("#btnNew");
 
-const incomes = document.querySelector(".incomes");
-const expenses = document.querySelector(".expenses");
-const total = document.querySelector(".total");
+  // AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
+  var tbody = document.querySelector("tbody");
+  var descItem = document.querySelector("#desc");
+  var amount = document.querySelector("#amount");
+  var type = document.querySelector("#type");
+  var btnNew = document.querySelector("#btnNew");
+  var spanEntrada = document.querySelector(".span-entrada");
+  var spanSaida = document.querySelector(".span-saida");
+  var spanTotal = document.querySelector(".span-total");
 
-let items;
+  var listaControle = []; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
 
-btnNew.onclick = () => {
-  if (descItem.value === "" || amount.value === "" || type.value === "") {
-    return alert("Preencha todos os campos!");
+  // AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
+  btnNew.onclick = () => {
+    console.log(descItem)
+    console.log(amount)
+
+    if (descItem.value === "" || amount.value === "" || type.value === "") {
+      return alert("Preencha todos os campos!");
+    }
+
+    // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
+    listaControle.push({
+      desc: descItem.value,
+      amount: Math.abs(amount.value).toFixed(2),
+      type: type.value,
+    });
+
+    setItensBD();
+    carregarItens();
+
+    // Enviando o valor da nova input
+    fetch("/financeiro/inserirCalculo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/financeiro.js
+
+        descricaoServer: listaControle[listaControle.length - 1].desc,
+        valorServer: listaControle[listaControle.length - 1].amount
+        // tipo: listaControle[listaControle.length - 1].type
+
+      })
+    })
+  };
+
+  function deleteItem(index) {
+    listaControle.splice(index, 1);
+    setItensBD();
+    carregarItens();
   }
 
-  items.push({
-    desc: descItem.value,
-    amount: Math.abs(amount.value).toFixed(2),
-    type: type.value,
-  });
+  function insertItem(item, index) {
+    let tr = document.createElement("tr");
 
-  setItensBD();
-
-  loadItens();
-
-  descItem.value = "";
-  amount.value = "";
-};
-
-function deleteItem(index) {
-  items.splice(index, 1);
-  setItensBD();
-  loadItens();
-}
-
-function insertItem(item, index) {
-  let tr = document.createElement("tr");
-
-  tr.innerHTML = `
+    tr.innerHTML = `
     <td>${item.desc}</td>
     <td>R$ ${item.amount}</td>
-    <td class="columnType">${
-      item.type === "Entrada"
-        ? '<i class="bx bxs-chevron-up-circle"></i>'
-        : '<i class="bx bxs-chevron-down-circle"></i>'
-    }</td>
+    <td class="columnType">${item.type === "Entrada"
+        ? '<i class="bx bx-check-circle"></i>'
+        : '<i class="bx bx-x-circle"></i>'
+      }</td>
     <td class="columnAction">
-      <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
+      <button class = "button-lixeira" onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
     </td>
   `;
 
-  tbody.appendChild(tr);
-}
+    tbody.appendChild(tr);
+  }
 
-function loadItens() {
-  items = getItensBD();
-  tbody.innerHTML = "";
-  items.forEach((item, index) => {
-    insertItem(item, index);
-  });
+  function carregarItens() {
+    listaControle = getItensBD();
+    tbody.innerHTML = "";
+    listaControle.forEach((item, index) => {
+      insertItem(item, index);
+    });
 
-  getTotals();
-}
+    calculationSpan();
+  }
 
-function getTotals() {
-  const amountIncomes = items
-    .filter((item) => item.type === "Entrada")
-    .map((transaction) => Number(transaction.amount));
+  function calculationSpan() {
+    const valorDeEntrada = listaControle
+      .filter((item) => item.type === "Entrada")
+      .map((transaction) => Number(transaction.amount));
 
-  const amountExpenses = items
-    .filter((item) => item.type === "Saída")
-    .map((transaction) => Number(transaction.amount));
+    const valorDeSaida = listaControle
+      .filter((item) => item.type === "Saída")
+      .map((transaction) => Number(transaction.amount));
 
-  const totalIncomes = amountIncomes
-    .reduce((acc, cur) => acc + cur, 0)
-    .toFixed(2);
+    const totalEntrada = valorDeEntrada
+      .reduce((acc, cur) => acc + cur, 0)
+      .toFixed(2);
 
-  const totalExpenses = Math.abs(
-    amountExpenses.reduce((acc, cur) => acc + cur, 0)
-  ).toFixed(2);
+    const totalSaida = Math.abs(
+      valorDeSaida.reduce((acc, cur) => acc + cur, 0)
+    ).toFixed(2);
 
-  const totalItems = (totalIncomes - totalExpenses).toFixed(2);
+    const totalItems = (totalEntrada - totalSaida).toFixed(2);
 
-  incomes.innerHTML = totalIncomes;
-  expenses.innerHTML = totalExpenses;
-  total.innerHTML = totalItems;
-}
+    spanEntrada.innerHTML = totalEntrada;
+    spanSaida.innerHTML = totalSaida;
+    spanTotal.innerHTML = totalItems;
+  }
 
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-const setItensBD = () =>
-  localStorage.setItem("db_items", JSON.stringify(items));
+  // Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
+  const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
+  const setItensBD = () => localStorage.setItem("db_items", JSON.stringify(listaControle));
 
-loadItens();
-
-
-/**
- *  AQUI É DO MEU ARQUIVO COFRE 
- * 
- * // AQUI ESTOU CRIANDO TODAS MINHA VARiÁVEIS E ATRIBUINDO VALOR ATRAVÉS DA (DOM do HTML)
-const tbody = document.querySelector("tbody");
-const descItem = document.querySelector("#id-desc");
-const amount = document.querySelector("#id-amount");
-const type = document.querySelector("#id-type");
-const btnNew = document.querySelector("#btnNew");
-
-const entradaValue = document.querySelector(".entrada");
-const saidaValue = document.querySelector(".saida");
-const totalValue = document.querySelector(".total");
-
-let items;
-
-// AQUI ESTOU CHAMANDO MEU BOTÃO e CRIANDO UMA FUNÇÂO ARROW FUNCTION COM IF
-btnNew; () => {
-//   if (descItem.value === "" || amount.value === "" || type.value === "") {
-//     return alert("Preencha todos os campos!");
-//   }
-
-  items.push({
-    desc: descItem.value,
-    amount: Math.abs(amount.value).toFixed(2),
-    type: type.value,
-  });
-
-  setItensBD(); // CHAMANDO a FUNÇÃO
-
-  loadItens(); // CHAMANDO a FUNÇÃO
-
-  descItem.value = "";
-  amount.value = "";
-};
-
-// O INDEX AQUI SERVE COMO PARAMETRÔ - Ou Seja posição
-function deleteItem(index) {
-  items.splice(index, 1);
-  setItensBD();
-  loadItens();
-}
-
-// FUNÇÃO pARA INSERIR ITENS - Passando alguns Parametrôs 
-function insertItem(item, index) {
-  let trIcon = document.createElement("trIcon");
-
-  trIcon.innerHTML = `
-    <td>${item.desc}</td>
-    <td>R$ ${item.amount}</td>
-    <td class="columnType">${
-      item.type === "Entrada"
-        ? '<i class="bx bxs-chevron-up-circle"></i>'
-        : '<i class="bx bxs-chevron-down-circle"></i>'
-    }</td>
-    <td class="columnAction">
-      <button onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
-    </td>
-  `;
-
-  tbody.appendChild(trIcon);
-}
-
-function loadItens() {
-  items = getItensBD();
-  tbody.innerHTML = "";
-
-  // ESSE forEach É UM OUTRO TIPO DE FOR, While e etc... Nesse Caso sendo ele uma ARROW FUNCTION CHAMANDO outra FUNÇÃO com seus parametrôs.
-  items.forEach((item, index) => {
-    insertItem(item, index);
-  });
-
-  getTotals();
-}
-
-function getTotals() {
-  const amountEntrada = items
-    .filter((item) => item.type === "Entrada")
-    .map((transaction) => Number(transaction.amount));
-
-  const amountSaida = items
-    .filter((item) => item.type === "Saída")
-    .map((transaction) => Number(transaction.amount));
-
-  const totalEntrada = amountEntrada
-    .reduce((acc, cur) => acc + cur, 0)
-    .toFixed(2);
-
-  const totalSaida = Math.abs(
-    amountSaida.reduce((acc, cur) => acc + cur, 0)
-  ).toFixed(2);
-
-  // ATRAVÉS DESSE CALCULO EU CONSIGO MOSTRAR EM TELA DINÃMICAMENTE O VALOR DO Usuario
-  const totalItems = (totalEntrada - totalSaida).toFixed(2);
-
-  entrada.innerHTML = totalEntrada;
-  saida.innerHTML = totalSaida;
-  total.innerHTML = totalItems;
-}
-
-const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-const setItensBD = () =>
-  localStorage.setItem("db_items", JSON.stringify(items));
-
-loadItens();
-  */
+  carregarItens();
