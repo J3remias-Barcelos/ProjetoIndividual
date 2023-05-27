@@ -66,8 +66,8 @@ function pesquisarDescricao(req, res) {
 }
 
 function publicar(req, res) {
-    var titulo = req.body.titulo;
-    var descricao = req.body.descricao;
+    var descricao = req.body.descricaoForm;
+    var valor = res.body.valorForm;
     var idUsuario = req.params.idUsuario;
 
     if (titulo == undefined) {

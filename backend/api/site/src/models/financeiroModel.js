@@ -1,39 +1,54 @@
 var database = require("../database/config")
 
-// function listar() {
-//     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
-//     var instrucao = `
-//         SELECT * FROM usuario;
-//     `;
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
+function listar() {
+    console.log("ACESSEI O FINANCEIRO MODEL LISTAR \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
 
-// function entrar(email, senha) {
-//     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
-//     var instrucao = `
-//         SELECT * FROM usuario WHERE email = '${email}' AND senhaUser = '${senha}';
-//     `;
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
-
-
-// Coloque os mesmos parâmetros aqui. Vá para a var instrucao
-
-function cadastrarNaCarteira(descricao, valor) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarNaCarteira():", descricao, valor);
-    console.log(descricao, valor);
-
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
     var instrucao = `
-        INSERT INTO carteira (descricao, valor) VALUES ('${descricao}', '${valor}');
+        SELECT * FROM transacao;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
+function listarPorUsuario(idUsuario) {
+    console.log("ACESSEI O FINANCEIRO MODEL LISTA/USUARIO \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
+    var instrucao = `
+        SELECT * FROM usuario JOIN transacao ON fkUsuario = '${idUsuario}';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+// Coloque os mesmos parâmetros aqui. Vá para a var instrucao
+
+function cadastrarNaCarteira(descricao, tipo, valor, idUsuario) {
+    console.log("ACESSEI O FINANCEIRO MODEL CADASTRAR NA CARTEIRA \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrarNaCarteira():", descricao, tipo, valor, idUsuario);
+    console.log(`${descricao}, ${tipo}, ${valor}, ${idUsuario}`);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+        INSERT INTO transacao (descricao, tipoValor, valor, fkUsuario) VALUES ('${descricao}', '${tipo}', '${valor}', '${idUsuario}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function deleteItem(idTransacao) {
+    console.log("ACESSEI O FINANCEIRO MODEL DELETAR \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idTransacao);
+    console.log(` CHEGUEI AQUI NA Transação - ${idTransacao}`);
+
+    var instrucao = `
+    DELETE FROM transacao WHERE idTransacao = ${idTransacao};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
 module.exports = {
-    cadastrarNaCarteira
+    cadastrarNaCarteira,
+    listar,
+    listarPorUsuario,
+    deleteItem
 };

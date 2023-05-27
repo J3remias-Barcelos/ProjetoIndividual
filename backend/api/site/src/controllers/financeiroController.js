@@ -4,24 +4,26 @@ var sessoes = [];
 
 function cadastrarNaCarteira(req, res) {
     var descricao = req.body.descricaoServer;
+    var tipo = req.body.tipoServer;
     var valor = req.body.valorServer;
-    console.log(descricao)
-    console.log(valor)
-    // var tipo = req.body.tipo;
+    var idUsuario = req.body.cadastrarServerID;
     // var controleFinanceiro = req.body.financeServer;
+    console.log(descricao) 
+    console.log(" controller - ",tipo)
+    console.log(valor)
 
     // Faça as validações dos valores
     if (descricao == undefined) {
         res.status(400).send("Sua descrição está undefined!");
+    } else if (tipo == undefined) {
+        res.status(400).send("Seu tipo está undefined!");
     } else if (valor == undefined) {
         res.status(400).send("Seu valor está undefined!");
-    // } else if (tipo == undefined) {
-    //     res.status(400).send("Seu saldo está undefined!");
-    // } else if (controleFinanceiro == undefined) {
-    //     res.status(400).send("Sua senha está undefined!");
+    } else if (idUsuario == undefined) {
+        res.status(400).send("Seu id está undefined!");
     } else {
 
-        financeiroModel.cadastrarNaCarteira(descricao, valor)
+        financeiroModel.cadastrarNaCarteira(descricao, tipo, valor, idUsuario)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -39,103 +41,66 @@ function cadastrarNaCarteira(req, res) {
         }
 }
 
-module.exports = {
-    cadastrarNaCarteira,
+function listar(req, res) {
+    financeiroModel.listar().then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os finances: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
 }
 
+function listarPorUsuario(req, res) {
+    var idUsuario = req.params.idUsuarioVar;
 
-// function testar(req, res) {
-//     console.log("ENTRAMOS NA usuarioController");
-//     res.json("ESTAMOS FUNCIONANDO!");
-// }
+    financeiroModel.listarPorUsuario(idUsuario)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado encontrado!");
+                }
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "Houve um erro ao buscar os avisos: ",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
-// function listar(req, res) {
-//     usuarioModel.listar()
-//         .then(function (resultado) {
-//             if (resultado.length > 0) {
-//                 res.status(200).json(resultado);
-//             } else {
-//                 res.status(204).send("Nenhum resultado encontrado!")
-//             }
-//         }).catch(
-//             function (erro) {
-//                 console.log(erro);
-//                 console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
-//                 res.status(500).json(erro.sqlMessage);
-//             }
-//         );
-// }
+function deleteItem(req, res) {
+    var idTransacao = req.params.idTransacao;
 
-// function entrar(req, res) {
-//     var email = req.body.emailServer;
-//     var senha = req.body.senhaServer;
+    financeiroModel.deleteItem(idTransacao)
+        .then(
+            function (resultado) {
+                res.json(resultado);
+            }
+        )
+        .catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao deletar o post: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+}
 
-//     if (email == undefined) {
-//         res.status(400).send("Seu email está undefined!");
-//     } else if (senha == undefined) {
-//         res.status(400).send("Sua senha está indefinida!");
-//     } else {
-        
-//         usuarioModel.entrar(email, senha)
-//             .then(
-//                 function (resultado) {
-//                     console.log(`\nResultados encontrados: ${resultado.length}`);
-//                     console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
-
-//                     if (resultado.length == 1) {
-//                         console.log(resultado);
-//                         res.json(resultado[0]);
-//                     } else if (resultado.length == 0) {
-//                         res.status(403).send("Email e/ou senha inválido(s)");
-//                     } else {
-//                         res.status(403).send("Mais de um usuário com o mesmo login e senha!");
-//                     }
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
-//                     res.status(500).json(erro.sqlMessage);
-//                 }
-//             );
-//     }
-
-// }
-
-// function cadastrar(req, res) {
-//     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-//     var nome = req.body.nomeServer;
-//     var email = req.body.emailServer;
-//     var cpf = req.body.cpfServer;
-//     var senha = req.body.senhaServer;
-//     var controleFinanceiro = req.body.financeServer;
-
-//     // Faça as validações dos valores
-//     if (nome == undefined) {
-//         res.status(400).send("Seu nome está undefined!");
-//     } else if (email == undefined) {
-//         res.status(400).send("Seu email está undefined!");
-//     } else if (cpf == undefined) {
-//         res.status(400).send("Seu CPF está undefined!");
-//     } else if (senha == undefined) {
-//         res.status(400).send("Sua senha está undefined!");
-//     } else {
-        
-//         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-//         usuarioModel.cadastrar(nome, email, cpf, senha)
-//             .then(
-//                 function (resultado) {
-//                     res.json(resultado);
-//                 }
-//             ).catch(
-//                 function (erro) {
-//                     console.log(erro);
-//                     console.log(
-//                         "\nHouve um erro ao realizar o cadastro! Erro: ",
-//                         erro.sqlMessage
-//                     );
-//                     res.status(500).json(erro.sqlMessage);
-//                 }
-//             );
-//     }
-// }
+module.exports = {
+    cadastrarNaCarteira,
+    listar,
+    listarPorUsuario,
+    deleteItem
+}

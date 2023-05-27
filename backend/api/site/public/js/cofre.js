@@ -1,113 +1,126 @@
+// AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
+var tbody = document.querySelector("tbody");
+var descItem = document.querySelector("#desc");
+var amount = document.querySelector("#amount");
+var type = document.querySelector(".typeCombo");
+var btnNew = document.querySelector("#btnNew");
+var spanEntrada = document.querySelector(".span-entrada");
+var spanSaida = document.querySelector(".span-saida");
+var spanTotal = document.querySelector(".span-total");
+var idUsuarioVar = sessionStorage.getItem("ID_USUARIO");
 
-  // AQUI É EU PUXANDO MEU HTML PARA VARiÁVEIS
-  var tbody = document.querySelector("tbody");
-  var descItem = document.querySelector("#desc");
-  var amount = document.querySelector("#amount");
-  var type = document.querySelector("#type");
-  var btnNew = document.querySelector("#btnNew");
-  var spanEntrada = document.querySelector(".span-entrada");
-  var spanSaida = document.querySelector(".span-saida");
-  var spanTotal = document.querySelector(".span-total");
+var listaControle = []; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
 
-  var listaControle = []; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
+setTimeout(() => atualizarFeed(), 100);
 
-  // AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
-  btnNew.onclick = () => {
-    console.log(descItem)
-    console.log(amount)
+// AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
+btnNew.onclick = () => {
 
-    if (descItem.value === "" || amount.value === "" || type.value === "") {
-      return alert("Preencha todos os campos!");
+  if (descItem.value === "" || amount.value === "" || type.value === "") {
+    return alert("Preencha todos os campos!");
+  }
+
+  // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
+  listaControle.push({
+    desc: descItem.value,
+    amount: Number(amount.value).toFixed(2),
+    type: type.value,
+  });
+
+  var corpoListaContole = {
+    descricaoServer: listaControle[listaControle.length - 1].desc,
+    tipoServer: type.value,
+    valorServer: listaControle[listaControle.length - 1].amount,
+    cadastrarServerID: idUsuarioVar
+  }
+
+  // Enviando o valor da nova input
+  fetch("/financeiro/inserirCalculo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(corpoListaContole)
+  }).then(function (corpoListaCont) {
+    if (corpoListaCont.ok) {
+      console.log("Item inserido com sucesso!");
+      atualizarFeed();
+    } else {
+      console.log("Erro ao inserir item!");
     }
+  }
+  )
+  calculationSpan();
+};
 
-    // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
-    listaControle.push({
-      desc: descItem.value,
-      amount: Math.abs(amount.value).toFixed(2),
-      type: type.value,
+function atualizarFeed() {
+  fetch(`/financeiro/listar/${idUsuarioVar}`).then(function (corpoListaContole) {
+    corpoListaContole.json().then(function (corpoListaCont) {
+
+      console.log(corpoListaCont);
+
+      tbody.innerHTML = "";
+      
+        for (var i = 0; i <corpoListaCont.length; i++) {
+        var item = corpoListaCont[i];
+        var trCorpo = document.createElement("tr");
+
+        trCorpo.innerHTML = `
+          <td>${item.descricao}</td>
+          <td>R$ ${item.valor}</td>
+          <td class="columnType">${item.tipoValor === "Entrada"
+            ? '<i class="bx bx-check-circle"></i>'
+            : '<i class="bx bx-x-circle"></i>'
+          }</td>
+        <td class="columnAction">
+        <button class = "button-lixeira" onclick="deleteItem(${item.idTransacao})"><i class='bx bx-trash'></i></button>
+        </td>
+        `;
+        tbody.appendChild(trCorpo);
+        console.log("ID da Transação: ", item.idTransacao)
+      }
     });
+  });
+}
 
-    setItensBD();
-    carregarItens();
-
-    // Enviando o valor da nova input
-    fetch("/financeiro/inserirCalculo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/financeiro.js
-
-        descricaoServer: listaControle[listaControle.length - 1].desc,
-        valorServer: listaControle[listaControle.length - 1].amount
-        // tipo: listaControle[listaControle.length - 1].type
-
-      })
-    })
-  };
-
-  function deleteItem(index) {
-    listaControle.splice(index, 1);
-    setItensBD();
-    carregarItens();
+function deleteItem(idTransacao) {
+  console.log("Criar função de apagar post escolhido - ID" + idTransacao);
+  fetch(`/financeiro/deleteItem/${idTransacao}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function (corpoListaCont) {
+    if (corpoListaCont.ok) {
+      console.log("Item apagado com sucesso!");
+      atualizarFeed();
+    } else {
+      console.log("Erro ao apagar item!");
+    }
   }
+  )
+}
 
-  function insertItem(item, index) {
-    let tr = document.createElement("tr");
+function calculationSpan() {
+  const valorDeEntrada = listaControle
+    .filter((item) => item.type === "Entrada")
+    .map((transaction) => Number(transaction.amount));
 
-    tr.innerHTML = `
-    <td>${item.desc}</td>
-    <td>R$ ${item.amount}</td>
-    <td class="columnType">${item.type === "Entrada"
-        ? '<i class="bx bx-check-circle"></i>'
-        : '<i class="bx bx-x-circle"></i>'
-      }</td>
-    <td class="columnAction">
-      <button class = "button-lixeira" onclick="deleteItem(${index})"><i class='bx bx-trash'></i></button>
-    </td>
-  `;
+  const valorDeSaida = listaControle
+    .filter((item) => item.type === "Saída")
+    .map((transaction) => Number(transaction.amount));
 
-    tbody.appendChild(tr);
-  }
+  const totalEntrada = valorDeEntrada
+    .reduce((acc, cur) => acc + cur, 0)
+    .toFixed(2);
 
-  function carregarItens() {
-    listaControle = getItensBD();
-    tbody.innerHTML = "";
-    listaControle.forEach((item, index) => {
-      insertItem(item, index);
-    });
+  const totalSaida = Number(
+    valorDeSaida.reduce((acc, cur) => acc + cur, 0)
+  ).toFixed(2);
 
-    calculationSpan();
-  }
+  const totalItems = (totalEntrada - totalSaida).toFixed(2);
 
-  function calculationSpan() {
-    const valorDeEntrada = listaControle
-      .filter((item) => item.type === "Entrada")
-      .map((transaction) => Number(transaction.amount));
-
-    const valorDeSaida = listaControle
-      .filter((item) => item.type === "Saída")
-      .map((transaction) => Number(transaction.amount));
-
-    const totalEntrada = valorDeEntrada
-      .reduce((acc, cur) => acc + cur, 0)
-      .toFixed(2);
-
-    const totalSaida = Math.abs(
-      valorDeSaida.reduce((acc, cur) => acc + cur, 0)
-    ).toFixed(2);
-
-    const totalItems = (totalEntrada - totalSaida).toFixed(2);
-
-    spanEntrada.innerHTML = totalEntrada;
-    spanSaida.innerHTML = totalSaida;
-    spanTotal.innerHTML = totalItems;
-  }
-
-  // Em BREVE FUTURAMENTE CONECTAR COM O BANCO!
-  const getItensBD = () => JSON.parse(localStorage.getItem("db_items")) ?? [];
-  const setItensBD = () => localStorage.setItem("db_items", JSON.stringify(listaControle));
-
-  carregarItens();
+  spanEntrada.innerHTML = totalEntrada;
+  spanSaida.innerHTML = totalSaida;
+  spanTotal.innerHTML = totalItems;
+}

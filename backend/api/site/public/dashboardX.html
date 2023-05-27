@@ -109,7 +109,7 @@
                 </div>
                 <div class="divType">
                   <label for="type">Tipo</label>
-                  <select name="type" id="type">
+                  <select name="type" class="typeCombo">
                     <option> Entrada</option>
                     <option> Saída</option>
                   </select>
@@ -134,7 +134,7 @@
               </div>
             </div>
 
-            <div class="graficos">
+            <!-- <div class="graficos">
 
               
               <div class="grafico-container">
@@ -146,7 +146,7 @@
                   <h2>Porcentagem da Carteira</h2>
                   <canvas id="chartAnalytics2"></canvas>
               </div>
-            </div>
+            </div> -->
           </div>
 
         </main>
@@ -157,7 +157,6 @@
 </html>
 <script>
     const list  = document.querySelectorAll('.list');
-
     function activeLink () {
         list.forEach((item) =>
         item.classList.remove('active'));
@@ -166,8 +165,6 @@
         list.forEach((item) =>
         item.addEventListener('click', activeLink));
     
-
-
   const ctxAnalytics = document.getElementById('chartAnalytics');
   new Chart(ctxAnalytics, {
     type: "line",
@@ -214,5 +211,6 @@
       }]
     },
   });
+
 
 </script>
