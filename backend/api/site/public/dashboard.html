@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <!-- BoxIcons Para ter Icones na Página -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- FAVICON X -->
+    <link rel="shortcut icon" href="../assets/icon/your-logo.png" type="image/x-icon">
+
+    <!-- CANVAS PARA EXIBIR O GRÁFICO -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CSS DA MINHA PAGE -->
+    <link rel="stylesheet" href="./css/dashboardX.css">
+
+    <!-- CHAMANDO MEU ARQUIVO JS -->
+    <!-- <script src="./js/cofre.js"></script> -->
+</head>
+
+<body>
+    <!-- HEADER PAGE -->
+    <header class="header">
+        <div>
+            <a href="#" class="logo">Dashboard   X</a>
+        </div>
+
+        <div class="navbar">
+            <a href="./project.html">Educação</a>
+            <a href="./cofre.html" class="">Controle Financeiro</a>
+        </div>
+    </header>
+
+    <!-- MAIN PAGE -->
+    <main class="page-context">
+
+        <!-- PÁGINA DO SITE DASHBOARD -->
+        <div class="navigation">
+            <ul>
+                <li class="list">
+                    <a href="./cofre.html">
+                        <span class="icon"><i class='bx bx-money-withdraw'></i></span>
+                        <span class="title">Control Finance</span>
+                    </a>
+                </li>
+                <li class="list active">
+                    <a href="./dashboard.html">
+                        <span class="icon"><i class='bx bxs-dashboard'></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./acoes.html">
+                        <span class="icon"><i class='bx bxs-landmark'></i></span>
+                        <span class="title">Ações</span>
+                    </a>
+                </li>
+                <li class="list">
+                    <a href="./index.html">
+                        <span class="icon"><i class='bx bx-exit'></i></span>
+                        <span class="title">Sair</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- CONTEÚDO DA PAGINA DASHBOARD -->
+        <div class="content">
+            <h1>Gráficos do Controle Financeiro</h1>
+
+            <div class="graficos">
+                <div class="grafico-container">
+                    <h2>Receita Vs Dispesa</h2>
+                    <canvas id="chartAnalytics"></canvas>
+                </div>
+
+                <div class="grafico-container">
+                    <h2>Porcentagem da Carteira</h2>
+                    <canvas id="chartAnalytics2"></canvas>
+
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>
+<script>
+    const list = document.querySelectorAll('.list');
+    function activeLink() {
+        list.forEach((item) =>
+            item.classList.remove('active'));
+        this.classList.add('active');
+    }
+    list.forEach((item) =>
+        item.addEventListener('click', activeLink));
+
+    const ctxAnalytics = document.getElementById('chartAnalytics');
+    new Chart(ctxAnalytics, {
+        type: "line",
+        data: {
+            labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
+                "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00",
+            ],
+            datasets: [
+                {
+                    label: "Sala de reunião - 12º Andar",
+                    data: [
+                        900, 900, 850, 900, 900, 850, 900, 900, 900, 850, 900, 850, 900,
+                        900, 900, 850, 900, 900, 900, 900, 850, 900, 900, 900,
+                    ],
+                    borderWidth: 1,
+                    backgroundColor: "rgb(235, 155, 13)",
+                    borderColor: "rgb(235, 155, 13)",
+                },
+            ],
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                },
+            },
+        },
+    });
+
+    const ctxAnalytics2 = document.getElementById('chartAnalytics2');
+    new Chart(ctxAnalytics2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Pessoas que não dorme', 'Pessoas que consegui dormir'],
+            datasets: [{
+                label: 'Gráfico de pessoas que não dormem',
+                data: [83, 17],
+                backgroundColor: [
+                    'rgb(85, 42, 124, 44)',
+                    'rgb(40,243,174)',
+                ],
+                borderWidth: 1,
+                hoverOffset: 4
+            }]
+        },
+    });
+
+
+</script>
