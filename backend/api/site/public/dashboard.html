@@ -27,7 +27,7 @@
     <!-- HEADER PAGE -->
     <header class="header">
         <div>
-            <a href="#" class="logo">Dashboard   X</a>
+            <a href="./dashboard.html" class="logo">Dashboard <span class="span-cor">X</span></a>
         </div>
 
         <div class="navbar">
@@ -45,7 +45,7 @@
                 <li class="list">
                     <a href="./cofre.html">
                         <span class="icon"><i class='bx bx-money-withdraw'></i></span>
-                        <span class="title">Control Finance</span>
+                        <span class="title">Control</span>
                     </a>
                 </li>
                 <li class="list active">
@@ -74,9 +74,12 @@
         <div class="content">
             <h1>Gráficos do Controle Financeiro</h1>
 
+
+            <p>Jere é muito legal</p> <br>
+
             <div class="graficos">
                 <div class="grafico-container">
-                    <h2>Receita Vs Dispesa</h2>
+                    <h2>Receita Vs Dispesa</h2> <br>
                     <canvas id="chartAnalytics"></canvas>
                 </div>
 
@@ -108,19 +111,26 @@
     new Chart(ctxAnalytics, {
         type: "line",
         data: {
-            labels: ["00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00",
-                "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00",
-            ],
-            datasets: [
-                {
-                    label: "Sala de reunião - 12º Andar",
-                    data: [
-                        900, 900, 850, 900, 900, 850, 900, 900, 900, 850, 900, 850, 900,
-                        900, 900, 850, 900, 900, 900, 900, 850, 900, 900, 900,
-                    ],
+            labels: [],
+            datasets: [{
+    label: 'My First Dataset',
+    data: [65, 59, 80, 81, 56, 55, 40],
                     borderWidth: 1,
                     backgroundColor: "rgb(235, 155, 13)",
                     borderColor: "rgb(235, 155, 13)",
+                },
+            ],
+            labels: [500, 600, 700, 800, 900,
+            ],
+            datasets: [
+                {
+                    label: "Dispesa",
+                    data: [
+                        100, 200, 300, 400, 500, 600, 700, 800, 1000, 2000, 3000,
+                    ],
+                    borderWidth: 1,
+                    backgroundColor: "rgb(235, 155, 230)",
+                    borderColor: "rgb(235, 155, 230)",
                 },
             ],
         },

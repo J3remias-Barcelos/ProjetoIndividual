@@ -66,12 +66,14 @@ body {
     color: var(--text-color);
     cursor: default;
 }
-/* .logo-project {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-color);
-    cursor: default;
-} */
+
+.span-cor {
+    color: var(--main-color);
+}
+
+.span-cor:hover {
+    transform: translateX(10px);
+}
 
 .navbar a {
     font-size: 1.7rem;
@@ -96,7 +98,8 @@ body {
     position: relative;
     background: rgb(2,0,36);
     width: 66px;
-    box-shadow: 4px 0 0 var(--text-color);
+    height: 68rem;
+    box-shadow: 4px 0px 0 var(--text-color);
     border-left: 10px solid var(rgba(47,5,73,1));
     overflow-x: hidden;
     transition: 0.5s;
@@ -121,7 +124,6 @@ body {
     width: 100%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-
 }
 
 .navigation ul li a {
@@ -204,10 +206,11 @@ body {
 }
 
 .content {
-    width: 90%;
+    width: 100%;
     margin-top: 8rem;
-    padding: 2rem 7%;
+    padding: 4rem 7%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: baseline;
     align-content: flex-end;
@@ -221,23 +224,26 @@ body {
 
 .content .graficos {
     padding: 4rem;
-    margin-left: 5rem;
-    max-width: 400px;
-
+    margin-left: 7rem;
+    width: 105rem;
+    height: 45rem;
     background: var(--bg--color);
+    opacity: 1.0;
     border-radius: 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.5);
     transition: 0.5s;  
 }
 
+.content .graficos:hover {
+    transform: translateY(-10px);
+}
 
-/* 
-margin-top: 20rem;
-margin-left: 70rem;
-padding: 4.5rem;
-width: 100%;
-max-width: 450px;
-background: var(--bg--color);
-border-radius: 20px;
-box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-transition: 0.5s; */
+/* AQUI EU ALTERO PARTE INTERNA */
+.graficos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    margin: auto;
+
+}

@@ -98,9 +98,57 @@ function deleteItem(req, res) {
         );
 }
 
+function pesquisarEntradas(req, res) {
+    var idUsuario = req.params.idUsuarioVar;
+
+    financeiroModel.pesquisarEntradas(idUsuario)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado de entrada encontrado!");
+                }
+            }
+        )
+}
+
+function pesquisarSaidas(req, res) {
+    var idUsuario = req.params.idUsuarioVar;
+
+    financeiroModel.pesquisarSaidas(idUsuario)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado de saída encontrado!");
+                }
+            }
+        )
+}
+
+// function calcularCaixa(req, res) {
+//     var idUsuario = req.params.idUsuarioVar;
+
+//     financeiroModel.calcularCaixa(idUsuario)
+//         .then(
+//             function (resultado) {
+//                 if (resultado.length > 0) {
+//                     res.status(200).json(resultado);
+//                 } else {
+//                     res.status(204).send("Nenhum resultado de saída encontrado!");
+//                 }
+//             }
+//         )
+// }
+
 module.exports = {
     cadastrarNaCarteira,
     listar,
     listarPorUsuario,
-    deleteItem
+    deleteItem,
+    pesquisarEntradas,
+    pesquisarSaidas,
+    // calcularCaixa
 }
