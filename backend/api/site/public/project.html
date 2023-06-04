@@ -7,244 +7,259 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Education Finance</title>
 
-  <!-- BoxIcons Para ter Icones na Página -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- BoxIcons para ter ícones na página -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-  <!-- CANVAS PARA EXIBIR O GRÁFICO -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-  <!-- FAVICON X -->
-  <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
-
-  <!-- CSS DA MINHA PAGE -->
+  <!-- CSS personalizado -->
   <link rel="stylesheet" href="./css/project.css">
 
-  <!-- CHAMANDO MEU ARQUIVO JS -->
-  <!-- <script src="./js/cofre.js"></script> -->
+  <!-- FAVICON -->
+  <link rel="shortcut icon" href="../assets/icon/faviconX.ico" type="image/x-icon">
 </head>
 
 <body>
-
-  <!-- HEADER PAGE -->
+  <!-- HEADER DA PÁGINA -->
   <header class="header">
     <div>
-      <a href="" class="logo">Invest X</a>
-      <!-- <a href="#" class="logo-project"> - xTr3vor</a> -->
+      <a href="#" class="logo">Invest X</a>
     </div>
-
-    <i class='bx bx-menu' id="menu-icone"></i>
-
+    <i class="bx bx-menu" id="menu-icone"></i>
     <div class="navbar">
       <a href="./project.html" class="ativo">Educação</a>
       <a href="./cofre.html">Controle Financeiro</a>
     </div>
   </header>
 
-  <!-- PÁGINA DO SITE DASHBOARD -->
-
+  <!-- CONTEÚDO DA PÁGINA -->
   <main class="page-context">
-
     <div class="cofre-contextEducacao">
-      <h1>
-        Educação Financeira
-      </h1>
+      <h1>Educação Financeira</h1>
+      <button class="button_oqueE" onclick="toggleSobre()">Sobre</button>
+      <div id="caixa"></div>
+    </div>
 
-      <button class="button_oqueE" onclick="buttonOqueE()">Sobre</button>
-      <div id="caixa" class="">
+    <div class="cofre-cards">
+      <h2>Quando descobri Educação Financeira</h2>
+
+      <div class="div_p_Information">
+        <p>Esse tema surgiu na minha vida em 2018, quando olhei para a minha família e percebi que certas coisas estavam acontecendo devido à falta de Educação Financeira. Isso me deixou indignado de uma maneira profunda. Foi nessa época que conheci o "Tiago Nigro" através dos seus vídeos publicados no Youtube. Naquela época, ele não era tão conhecido e tinha poucos seguidores. Ao longo do ano, ele começou a criar alguns desafios no Instagram às 4 da manhã. Eu participei de todos eles e até tomei aquele banho gelado para me manter alerta.</p> <br>
+
+        <p>Aprendi muito sobre a importância de construir um patrimônio relevante e como a área financeira impacta todos os aspectos da vida.</p> <br>
+
+        <p>Para colocar em prática todo esse conhecimento, meu pai decidiu abrir uma conta em Seu nome, já que eu era menor de idade, com apenas 14 anos. Essa experiência me permitiu aprender a organizar e utilizar o seu salário de forma consciente...</p> 
+      </div>
+      <div>
+          <!-- <img src=""> -->
       </div>
     </div>
+
+    <div class="cofre-cards-livros">
+      <h2>Livros que tenho em casa</h2>
+      <div class="fotoDosLivros">
+        <span></span>
+        <img src="./assets/imgs/livroDoMilAoMilhão.png">
+
+        <span></span>
+        <img src="./assets/imgs/livroMétodoFinanceiroThiagoN.png">
+
+        <span></span>
+        <img src="./assets/imgs/QuemPensaEnriquece.png">
+
+        <span></span>
+        <img src="./assets/imgs/+EspertoQueODiabo.png">
+
+        
+        <span></span>
+        <img src="./assets/imgs/ProsperidadeDeDeus.png">
+        
+        <span></span>
+        <img src="./assets/imgs/21DiasFinanceiro.png">
+      </div>
+
+    </div>
+
 
     <div class="cofre-cards">
       <h2>Falta de Educação Financeira</h2>
+      <div class="div_p_FaltaEducacao">
+        <p>Aqui é uma breve ilustração quando não existe Educação Financeira</p>
+      </div>
+      <div class="sliderStyle" style="border-radius: 1rem;">
+        <div class="slides">
+          <!-- RADIO BUTTONS-->
+          <input type="radio" class="radio-btn" id="radio1" name="slides" checked>
+          <input type="radio" class="radio-btn" id="radio2" name="slides">
+          <input type="radio" class="radio-btn" id="radio3" name="slides">
+          <input type="radio" class="radio-btn" id="radio4" name="slides">
+          <!-- FIM RADIO BUTTONS-->
 
-
-      <div class="card-container">
-
-        <div class="sliderStyle">
-          <div class="slides">
-            <!-- RADIO BUTTONS-->
-            <input type="radio" class="radio-btn" id="radio1">
-            <input type="radio" class="radio-btn" id="radio2">
-            <input type="radio" class="radio-btn" id="radio3">
-            <input type="radio" class="radio-btn" id="radio4">
-            <!-- FIM RADIO BUTTONS-->
-
-            <!-- SLIDES IMAGES -->
-            <div class="slide first">
-              <img src="./assets/./imgs/semDormir.jpg">
-            </div>
-
-            <div class="slide">
-              <img src="./assets/./imgs/pessoaPreocupada.jpeg">
-            </div>
-
-            <div class="slide">
-              <img src="./assets/./imgs/casamentoDestruido.jpeg">
-            </div>
-
-            <div class="slide">
-              <img src="./assets/./imgs/casamentoDestruido.jpeg">
-            </div>
-            <!-- FIM DO SLIDES IMAGES -->
-
-            <!-- NAVIGATION AUTO - Bolinhas de Navegação -->
-            <div class="navigation-auto">
-              <div class="auto-btn1"></div>
-              <div class="auto-btn2"></div>
-              <div class="auto-btn3"></div>
-              <div class="auto-btn4"></div>
-            </div>
-
+          <!-- SLIDES IMAGES -->
+          <div class="slide first">
+            <img src="./assets/imgs/semDormir.jpg">
           </div>
-
-          <div class="manual-navigation">
-            <label for="radio1" class="manual-btn"></label>
-            <label for="radio2" class="manual-btn"></label>
-            <label for="radio3" class="manual-btn"></label>
-            <label for="radio4" class="manual-btn"></label>
-
+          <div class="slide">
+            <img src="./assets/imgs/pessoaPreocupada.jpeg">
           </div>
+          <div class="slide">
+            <img src="./assets/imgs/casamentoDestruido.jpeg">
+          </div>
+          <div class="slide">
+            <img src="./assets/imgs/casamentoDestruido.jpeg">
+          </div>
+          <!-- FIM DO SLIDES IMAGES -->
 
+          <!-- NAVIGATION AUTO - Bolinhas de Navegação -->
+          <div class="navigation-auto">
+            <div class="auto-btn1"></div>
+            <div class="auto-btn2"></div>
+            <div class="auto-btn3"></div>
+            <div class="auto-btn4"></div>
+          </div>
         </div>
-
+        <div class="manual-navigation">
+          <label for="radio1" class="manual-btn"></label>
+          <label for="radio2" class="manual-btn"></label>
+          <label for="radio3" class="manual-btn"></label>
+          <label for="radio4" class="manual-btn"></label>
+        </div>
       </div>
     </div>
 
-    <div class="cofre-cards">
-      <h2>Realidade Estatística</h2>
+    <div class="cofre-cards-graficos" >
+      <h2>Estatísticas sobre o tema</h2>
 
-      <div class="grafico">
-        <div class="grafico-container">
+      <div class="grafico"> 
+        <div class="grafico-container">  <!-- GRÁFICO 1-->
           <h3>Ficar sem Dormir - Preocupação</h3>
-          <p> A Serasa ouviu pessoas endividadas ao redor do Brasil e 83% delas declararam que literalmente estão perdendo o    sono devido à preocupação.</p><br>
-
-            <canvas id="chartPreocupacao"></canvas>
-
+          <p>De acordo com um estudo realizado pela Serasa, que entrevistou pessoas endividadas em todo o Brasil, constatou-se que 83% delas afirmaram estar literalmente perdendo o sono devido à preocupação financeira. Esse dado revela o impacto significativo que as dívidas têm sobre o bem-estar emocional das pessoas.</p><br>
+          <canvas id="chartPreocupacao"></canvas>
         </div>
 
-        <div class="grafico-container">
+        <div class="grafico-container">  <!-- GRÁFICO 2-->
           <h3>Emocional abalado</h3>
-          <p>
-            De acordo com 2 fontes
-            De acordo com o Instituto Brasileiro de Geografia e Estatística (IBGE), 57% dos casamentos chegam ao fim por
-            conta de desentendimentos que envolvem dinheiro.</p> <br>
-
-            <canvas id="charttext"></canvas>
+          <p>Um estudo conduzido pela American Psychological Association (APA) em 2019 descobriu que 72% dos adultos nos Estados Unidos relataram sentir estresse relacionado a questões financeiras. Além disso, 22% dos participantes mencionaram que o dinheiro era uma fonte significativa de estresse em suas vidas.</p><br>
+          <canvas id="chartEmocional"></canvas>
         </div>
 
-        <div class="grafico-container">
+        <div class="grafico-container"> <!-- GRÁFICO 3-->
           <h3>Casamentos destruídos</h3>
-          <p>De acordo com o Instituto Brasileiro de Geografia e Estatística (IBGE), 57% dos casamentos chegam ao fim por
-            conta de desentendimentos que envolvem dinheiro.</p> <br>
-
+          <p>Segundo dados do Instituto Brasileiro de Geografia e Estatística (IBGE), constatou-se que 57% dos casamentos chegam ao fim devido a desentendimentos relacionados a questões financeiras. Essa estatística evidencia a importância de uma gestão saudável das finanças pessoais e a necessidade de uma comunicação aberta e transparente entre os parceiros para evitar conflitos nessa área.</p><br>
           <canvas id="chartCasamentos"></canvas>
         </div>
       </div>
-
     </div>
-    </div>
-    </div>
-
-
-
   </main>
-</body>
 
-</html>
+  <!-- FOOTER DA PÁGINA -->
+  <footer class="footer">
+    <div class="footer-content">
+      <h3>Contato com o Desenvolvedor</h3>
+      <p>Para mais informações sobre aplicação, entre em contato pelas redes:</p>
+      <ul class="socials">
+        <li><a href="#" class="social" style="width: 4rem; height: 4rem;"><i class='bx bxl-whatsapp'></i></a></li>
+        <li><a href="#" class="social" style="width: 4rem; height: 4rem;"><i class='bx bxl-linkedin'></i></a></li>
+        <li><a href="#" class="social" style="width: 4rem; height: 4rem;"><i class='bx bxl-instagram'></i></a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <p>Todos os direitos reservados &copy; SPTech e Jeremias - 2023 | Desenvolvido por Jeremias Barcelos</p>
+    </div>
+  </footer>
 
-<script>
-  // EDUCAÇÃO FINANCEIRA - Puxar Botão
-  function buttonOqueE() {
-    caixa.innerHTML =
-      `
-      <div class="div_p">
-      Na prática, educação financeira é o conjunto de todos os aprendizados sobre como gerir bem as finanças. Mais
-      do que apenas poupar, educação financeira é sobre saber como utilizar o dinheiro ou salário recebido,
-      planejando, calculando e tomando decisões certeiras, que não vão impactar negativamente o bolso.
-      </div>
-      `
+  <!-- Scripts JS -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="./js/cofre.js"></script>
+  <script>
+    // EDUCAÇÃO FINANCEIRA - Toggle Sobre
+    function toggleSobre() {
+      var caixa = document.getElementById("caixa");
+      var conteudo =
+        `<div class="div_p">
+          Na prática, educação financeira é o conjunto de todos os aprendizados sobre como gerir bem as finanças. Mais
+          do que apenas poupar, educação financeira é sobre saber como utilizar o dinheiro ou salário recebido,
+          planejando, calculando e tomando decisões certeiras, que não vão impactar negativamente o bolso.
+        </div>`;
+
+      if (caixa.innerHTML === "") {
+        caixa.innerHTML = conteudo;
+        setTimeout(function () {
+          caixa.innerHTML = "";
+        }, 10000);
+      } else {
+        caixa.innerHTML = "";
+      }
+    }
+
+    // SLIDER QUE SE MOVIMENTA
+    var count = 1;
+    document.getElementById("radio1").checked = true;
 
     setInterval(function () {
-      buttonOqueE_close();
-    }, 10000);
-  }
+      nextImage();
+    }, 5000);
 
-  // EDUCAÇÃO FINANCEIRA - Fechar Botão 
-  function buttonOqueE_close() {
-    caixa.innerHTML = ""
-  }
-
-  // SLIDER QUE SE MOVIMENTA
-  var count = 1;
-  document.getElementById("radio1").checked = true;
-
-  setInterval(function () {
-    nextImage();
-  }, 5000);
-
-  function nextImage() {
-    count++;
-    if (count > 4) {
-      count = 1;
+    function nextImage() {
+      count++;
+      if (count > 4) {
+        count = 1;
+      }
+      document.getElementById("radio" + count).checked = true;
     }
-    document.getElementById("radio" + count).checked = true;
-  }
 
-  // GRÁFICO COM IRFORMAÇÕES DE SOBRE EDUCAçÃO FINANCEIRA
+    // GRÁFICOS COM INFORMAÇÕES SOBRE EDUCAÇÃO FINANCEIRA
+    const ctxPreocupacao = document.getElementById('chartPreocupacao');
+    new Chart(ctxPreocupacao, {
+      type: 'doughnut',
+      data: {
+        labels: ['Pessoas que não dormem', 'Pessoas que conseguem dormir'],
+        datasets: [{
+          label: 'Gráfico de Pessoas Preocupadas!',
+          data: [83, 17],
+          backgroundColor: [
+            'rgba(85, 42, 124, 0.44)',
+            'rgb(40, 243, 174)',
+          ],
+          borderWidth: 1,
+          hoverOffset: 4
+        }]
+      },
+    });
 
-  const ctxFamilia = document.getElementById('chartPreocupacao');
-  new Chart(ctxFamilia, {
-    type: 'doughnut',
-    data: {
-      labels: ['Pessoas que não dorme', 'Pessoas que consegui dormir'],
-      datasets: [{
-        label: 'Gráfico de pessoas que não dormem',
-        data: [83, 17],
-        backgroundColor: [
-        'rgb(85, 42, 124, 44)',
-          'rgb(40,243,174)',
-        ],
-        borderWidth: 1,
-        hoverOffset: 4
-      }]
-    },
-  });
+    const ctxEmocional = document.getElementById('chartEmocional');
+    new Chart(ctxEmocional, {
+      type: 'doughnut',
+      data: {
+        labels: ['Pessoas C/ Emocional abalado', 'Pessoas não afetadas no emocional'],
+        datasets: [{
+          label: 'Gráfico de Emocional abalado',
+          data: [72, 28],
+          backgroundColor: [
+            'rgba(85, 42, 124, 0.44)',
+            'rgb(40, 243, 174)',
+          ],
+          borderWidth: 1,
+          hoverOffset: 4
+        }]
+      },
+    });
 
-  const ctxEmocional = document.getElementById('charttext');
-  new Chart(ctxEmocional, {
-    type: 'doughnut',
-    data: {
-      labels: ['test', 'Test'],
-      datasets: [{
-        label: 'Minha Pizza',
-        data: [300, 100],
-        backgroundColor: [
-        'rgb(85, 42, 124, 44)',
-          'rgb(40,243,174)',
-        ],
-        borderWidth: 1,
-        hoverOffset: 4
-      }]
-    },
-  });
-
-  const ctxCasamentos = document.getElementById('chartCasamentos');
-  new Chart(ctxCasamentos, {
-    type: 'doughnut',
-    data: {
-      labels: ['Casamentos destruídos', 'Casamentos não afetados'],
-      datasets: [{
-        label: 'Gráfico que mostra o Divórcio no Brasil',
-        data: [57, 43],
-        backgroundColor: [
-        'rgb(85, 42, 124, 44)',
-          'rgb(40,243,174)',
-        ],
-        borderWidth: 1,
-        hoverOffset: 4
-      }]
-    },
-  });
-
-</script>
+    const ctxCasamentos = document.getElementById('chartCasamentos');
+    new Chart(ctxCasamentos, {
+      type: 'doughnut',
+      data: {
+        labels: ['Casamentos destruídos', 'Casamentos não afetados'],
+        datasets: [{
+          label: 'Gráfico de casamentos destruídos',
+          data: [57, 43],
+          backgroundColor: [
+            'rgba(85, 42, 124, 0.44)',
+            'rgb(40, 243, 174)',
+          ],
+          borderWidth: 1,
+          hoverOffset: 4
+        }]
+      },
+    });
+  </script>
+</body>
+</html>

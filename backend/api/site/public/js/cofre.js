@@ -83,7 +83,7 @@ function atualizarFeed() {
     });
   });
 
-  calculationSpan(idUsuarioVar);
+  calculationSpan();
 }
 
 function deleteItem(idTransacao) {
@@ -104,130 +104,60 @@ function deleteItem(idTransacao) {
   )
 }
 
-function calculationSpan(idUsuarioVar) {
-  console.log("Dados de Entrada e Saída do Usuário: " + idUsuarioVar);
+async function calculationSpan() {
+  console.log("ID do Usuario: " + idUsuarioVar);
 
-  fetch(`/financeiro/entradas/${idUsuarioVar}`).then(function (corpoListaContole) {
+  await fetch(`/financeiro/entradas/${idUsuarioVar}`).then(function (corpoListaContole) {
     corpoListaContole.json().then(function (corpoListaCont) {
-      console.log("QUERO PUXAR A SOMA DAS ENTRADAS: ", corpoListaCont);
 
-      spanEntrada.innerHTML = '';
-      var totalEntrada = corpoListaCont[0].valorEntrada.toFixed(2);
-      spanEntrada.innerHTML = totalEntrada;
-
-      console.log("Total de Entrada: ", totalEntrada);
-      return spanEntrada;
+      console.log("Entradas: ", corpoListaCont);
+      spanEntrada.innerHTML = corpoListaCont[0].valorEntrada.toFixed(2);
     });
-  })
-
-  fetch(`/financeiro/saidas/${idUsuarioVar}`).then(function (corpoListaContole) {
-    corpoListaContole.json().then(function (corpoListaCont) {
-      console.log("QUERO PUXAR A SOMA DAS SAÍDAS: ", corpoListaCont);
-
-      spanSaida.innerHTML = '';
-      var totalSaida = corpoListaCont[0].valorSaida.toFixed(2);
-      spanSaida.innerHTML = totalSaida;
-
-      console.log("Total de Saída: ", totalSaida);
-      return spanSaida;
-    });
-  })
-
-  setTimeout(() => {
-    var total = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
-    spanTotal.innerHTML = total;
-    console.log("Total: ", total);
   }
-    , 100);
+  )
+
+  await fetch(`/financeiro/saidas/${idUsuarioVar}`).then(function (corpoListaContole) {
+    corpoListaContole.json().then(function (corpoListaCont) {
+
+      console.log("Saidas: ", corpoListaCont);
+      spanSaida.innerHTML = corpoListaCont[0].valorSaida.toFixed(2);
+    });
+  }
+  )
+
+  await fetch(`/financeiro/caixa/${idUsuarioVar}`).then(function (corpoListaContole) {
+    corpoListaContole.json().then(function (corpoListaCont) {
+
+      console.log("Caixa: ", corpoListaCont);
+      spanTotal.innerHTML = corpoListaCont[0].valorCaixa.toFixed(2);
+    });
+    }
+  )
+
+  // Além de buscar no Banco quero Inserir no campo (saldoAtual)
+  // fetch(`/financeiro/atualizarCaixa/${idUsuarioVar}`), {
+  //   method: "PUT",
+  //   headers: {
+  //     "Content-Type": "application/json"
+  //   }.then(function (corpoListaCont) {
+  //     if (corpoListaCont.ok) {
+  //       console.log("Item apagado com sucesso!");
+  //       atualizarFeed();
+  //     } else {
+  //       console.log("Erro ao apagar item!");
+  //     }
+  //     })
+  //     }
 }
 
-    // console.log((spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2));
+// setTimeout(() => {
+//   var total = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
+//   spanTotal.innerHTML = total;
+//   console.log("Total: ", total);
+// }
+//   , 10000);
+
+
+// console.log((spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2));
     // spanTotal.innerHTML = '';
     // spanTotal.innerHTML = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
-  
-
-
-  // fetch(`/financeiro/caixa/:${idUsuarioVar}`).then(function (corpoListaCont) {
-  //   corpoListaCont.json().then(function (corpoListaCont) {
-  //     console.log("QUERO PUXAR A SOMA DAS SAÍDAS: ", corpoListaCont);
-
-  //     spanTotal.innerHTML = '';
-  //     var totalCaixa = corpoListaCont[0].valor.toFixed(2);
-  //     spanTotal.innerHTML = totalCaixa;
-  //   });
-  // }
-  // )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    fetch("/financeiro/pesquisar/entradas").then(function (corpoListaContole) {
-//     corpoListaContole.json().then(function (corpoListaCont) {
-//       console.log("QUERO PUXAR A SOMA DAS ENTRADAS: ", corpoListaCont);
-
-//       var totalEntrada = corpoListaCont[0].totalEntrada;
-//       spanEntrada.innerHTML = totalEntrada;
-//     });
-//    }
-//     )
-
-//     fetch("/financeiro/pesquisar/saidas").then(function (corpoListaContole) {
-//       corpoListaContole.json().then(function (corpoListaCont) {
-//         console.log("QUERO PUXAR A SOMA DAS SAÍDAS: ", corpoListaCont);
-
-//         var totalSaida = corpoListaCont[0].totalSaida;
-//         spanSaida.innerHTML = totalSaida;
-//       });
-//       }
-//     )
-
-//     // APÓS PUXAR A SOMA DAS ENTRADAS E SAÍDAS AGORA É SÓ CALCULAR E EXIBIR ISSO EM SPAN -> 'Caixa:'
-
-//     var totalItems = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
-//     spanTotal.innerHTML = totalItems;
-// }
-
-
-
-// const valorDeEntrada = listaControle
-//     .filter((item) => item.type === "Entrada")
-//     .map((transaction) => Number(transaction.amount));
-
-//   const valorDeSaida = listaControle
-//     .filter((item) => item.type === "Saída")
-//     .map((transaction) => Number(transaction.amount));
-
-//   const totalEntrada = valorDeEntrada
-//     .reduce((acc, cur) => acc + cur, 0)
-//     .toFixed(2);
-
-//   const totalSaida = Number(
-//     valorDeSaida.reduce((acc, cur) => acc + cur, 0)
-//   ).toFixed(2);
-
-//   const totalItems = (totalEntrada - totalSaida).toFixed(2);
-
-//   spanEntrada.innerHTML = totalEntrada;
-//   spanSaida.innerHTML = totalSaida;
-//   spanTotal.innerHTML = totalItems;

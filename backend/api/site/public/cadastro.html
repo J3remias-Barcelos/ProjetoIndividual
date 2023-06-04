@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,7 @@
         rel="stylesheet">
 
 </head>
+
 <body>
 
     <!-- HEADER PAGE -->
@@ -76,9 +78,32 @@
                 <div id="mensagem_erro"></div>
 
                 <span class="cliqueAqui">
-                    Já tem uma conta? 
+                    Já tem uma conta?
                     <a href="./login.html">Clique aqui</a>
                 </span>
+            </div>
+        </div>
+
+        
+    </div>
+    <!-- ^  parte alertas  ^ -->
+    <div id="exibir">
+        <div class="divAlerta ">
+            <div id="CamposEmBrancoAlert" class=" campoAlert camposEmBrancoAlert none">
+                <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+                <p>Campos em branco digite algo para continuar!</p>
+            </div>
+            <div id="CampoEmailAlert" class=" campoAlert camposEmail none">
+                <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+                <p>Campo E-mail invalido! </p>
+            </div>
+            <div id="CampoSenhaAlert" class=" campoAlert camposSenha none">
+                <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+                <p>Senhas não compativeis!</p>
+            </div>
+            <div id="CampoTudoCertoAlert" class=" campoAlert TudoCerto none">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
+                <p>Parabens você foi cadastrado!</p>
             </div>
         </div>
     </div>
@@ -93,6 +118,7 @@
     <!--footer fim-->
 
 </body>
+
 </html>
 
 <script>
@@ -110,7 +136,7 @@
         // confirmacaoSenhaVar == ""  <- CASO EU QUEIRA USAR CONFIRMAÇÃO
         if (nomeVar == "" || cpfVar == "" || emailVar == "" || senhaVar == "") {
             mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            
+
             return false;
         }
 
@@ -135,10 +161,10 @@
             if (resposta.ok) {
                 mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
 
-                    window.location = "login.html";
+                window.location = "login.html";
 
                 limparFormulario();
-             
+
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
@@ -152,5 +178,12 @@
     // function sumirMensagem() {
     //     cardErro.style.display = "none"
     // }
+
+
+    // alert deu tudo certo
+    CampoTudoCertoAlert.classList.remove('none')
+    setTimeout(() => {
+        CampoTudoCertoAlert.classList.add('none')
+    }, "2000")
 
 </script>

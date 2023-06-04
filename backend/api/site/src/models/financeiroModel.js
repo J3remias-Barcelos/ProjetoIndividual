@@ -67,10 +67,30 @@ function pesquisarSaidas(idUsuario) {
     return database.executar(instrucao);
 }
 
-// function calcularCaixa(idUsuario) {
-//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function calcularCaixa()");
+function calcularCaixa(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function calcularCaixa()");
+    var instrucao = `
+    SELECT ((SELECT sum(valor) as valorEntrada FROM transacao  WHERE tipoValor = 'Entrada') - (SELECT sum(valor) as valorSaida FROM transacao  WHERE tipoValor = 'Saída')) as valorCaixa FROM transacao WHERE fkUsuario = ${idUsuario} limit 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+// function pesquisarDashboar(idUsuario) {
+//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDashboards()");
 //     var instrucao = `
-    
+//     SELECT (select sum(valor) FROM transacao  WHERE tipoValor = 'Entrada') as Entrada, 
+//     (SELECT sum(valor) as Valor FROM transacao  WHERE tipoValor = 'Saída') as Saída ,
+//     (select sum(valor) FROM transacao  WHERE tipoValor = 'Entrada')-(SELECT sum(valor) as Valor FROM transacao  WHERE tipoValor = 'Saída') as Total;
+//     `;
+//     console.log("Executando a instrução SQL: \n" + instrucao);
+//     return database.executar(instrucao);
+// }
+
+// function atualizarCaixa(idUsuario) {
+//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarCaixa()");
+//     var instrucao = `
+//     UPDATE transacao SET saldoAtual =  (SELECT sum(valor) as valorEntrada FROM transacao  WHERE tipoValor = 'Entrada') - (SELECT sum(valor) as valorSaida FROM transacao  WHERE tipoValor = 'Saída') FROM transacao WHERE fkUsuario = ${idUsuario};
 //     `;
 //     console.log("Executando a instrução SQL: \n" + instrucao);
 //     return database.executar(instrucao);
@@ -83,5 +103,7 @@ module.exports = {
     deleteItem,
     pesquisarEntradas,
     pesquisarSaidas,
-    // calcularCaixa
+    calcularCaixa,
+    // pesquisarDashboar
+    // atualizarCaixa
 };

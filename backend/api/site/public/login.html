@@ -18,7 +18,7 @@
 
     <!-- CHAMANDO MEU ARQUIVO JS -->
     <script src="./js/funcoes.js"></script>
-    
+
 </head>
 
 <body>
@@ -51,17 +51,40 @@
                 <span>Senha:</span>
                 <input type="password" name="senha" id="senha_input" placeholder="Digite sua senha">
 
-                
+
                 <button class="btn-login" onclick="entrar()">Entrar</button>
 
                 <span class="cliqueAqui">
-                    Não tem uma conta? 
+                    Não tem uma conta?
                     <a href="./cadastro.html">Clique aqui</a>
                 </span>
             </div>
         </div>
     </div>
+    <!-- ^  parte alertas  ^ -->
+    <div id="exibir">
+        <div class="divAlerta ">
+            <div id="CamposEmBrancoAlert" class=" campoAlert camposEmBrancoAlert none">
+                <i class="fa-sharp fa-solid fa-circle-exclamation"></i>
+                <p>Campos em branco digite algo para continuar!</p>
+            </div>
+            <div id="CamposEmProcessoAlert" class=" campoAlert CamposEmProcessoAlert none">
+                <i class="fa-regular fa-circle-dashed"></i>
+                <p>Validando login!</p>
+            </div>
+
+            <div id="CampoTudoCertoAlert" class=" campoAlert TudoCerto none">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
+                <p>Login encontrado!</p>
+            </div>
+            <div id="CampoTudoErradoAlert" class=" campoAlert CampoTudoErradoAlert none">
+                <i class="fa-sharp fa-solid fa-circle-check"></i>
+                <p>Login não encontrado encontrado!</p>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
 
 <script>
@@ -72,6 +95,21 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
+            if (emailVar == "" || senhaVar == "") {
+
+                CamposEmBrancoAlert.classList.remove('none')
+
+                setTimeout(() => {
+                    CamposEmBrancoAlert.classList.add('none')
+                }, "2000")
+
+                return false;
+            }
+            CamposEmProcessoAlert.classList.remove('none')
+            setTimeout(() => {
+                CamposEmProcessoAlert.classList.add('none')
+            }, "2000")
+            
             console.log("Deu falso")
             return false;
         }

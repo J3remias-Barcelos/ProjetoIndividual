@@ -38,7 +38,8 @@ html {
 }
 
 body {
-    background-color: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     color: var(--text-color);
     /* font-size: 1.6rem;
     overflow: hidden; */
@@ -50,11 +51,13 @@ body {
     left: 0;
     width: 100%;
     padding: 2rem 9%;
-    background: var(--bg--color);
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    box-shadow: 1px 0px 2px 0px var(--main-color);
 }
 
 .logo {
@@ -102,7 +105,8 @@ body {
     height: 50rem;
     border-radius: 12px;
     background-color: var(--text-color);
-    box-shadow: 10px 9px var(--terceira-bg-color);
+    /* box-shadow: 10px 9px var(--terceira-bg-color); */
+    box-shadow: rgb(38, 57, 77) 25px 25px 30px -10px;
 }
 
 .form h1 {
@@ -156,6 +160,110 @@ body {
     color: var(--segunda-bg-color);
 }
 
+.cliqueAqui a {
+    display: flex;
+    margin-left: 10px;
+    justify-content: space-between;
+    font-size: 1.9rem;
+}
+
 .card-forms .cliqueAqui a:hover {
     color: var(--main-color);
+}
+
+
+.divAlerta {
+    width: 100vw;
+    position: relative;
+
+}
+
+.campoAlert {
+    position: absolute;
+    right: 0%;
+    top: -15px;
+    width: 500px;
+    display: flex;
+    border-radius: 4px 0 0 4px;
+    padding: 1%;
+    font-size: 20px;
+    overflow: hidden;
+    margin-top: 2%;
+    animation: CampoAlert 1s ease forwards;
+}
+
+.camposEmBrancoAlert {
+    background: #faff9e;
+    border-left: 8px solid #b4bd01;
+    color: #b4bd01;
+}
+
+
+.camposSenha {
+    background: #ffbb6d;
+    border-left: 8px solid #bd5f01;
+    color: #bd5f01;
+}
+
+.camposEmail {
+    background: #ffcb9e;
+    border-left: 8px solid #bd7501;
+    color: #bd7501;
+}
+
+.CamposEmProcessoAlert{
+    background: #9ef0ff;
+    border-left: 8px solid #0175bd;
+    color: #0175bd;
+}
+
+
+.TudoCerto {
+    background: #b6ff9e;
+    border-left: 8px solid #04bd01;
+    color: #04bd01;
+}
+
+.CampoTudoErradoAlert{
+    background: #ff9e9e;
+    border-left: 8px solid #bd0101;
+    color: #bd0101;
+}
+
+.none {
+    display: none;
+}
+
+.block {
+    display: flex;
+}
+
+.campoAlert i {
+    padding-right: 2%;
+}
+
+@keyframes CampoAlert {
+    0% {
+        transform: translateX(100%);
+    }
+
+
+    25% {
+
+        transform: translateX(-10%);
+
+    }
+
+    75% {
+
+        transform: translateX(0%);
+
+    }
+
+    100% {
+
+        transform: translateX(-10px);
+
+    }
+
 }

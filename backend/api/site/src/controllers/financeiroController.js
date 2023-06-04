@@ -128,10 +128,45 @@ function pesquisarSaidas(req, res) {
         )
 }
 
-// function calcularCaixa(req, res) {
+function calcularCaixa(req, res) {
+    var idUsuario = req.params.idUsuarioVar;
+
+    financeiroModel.calcularCaixa(idUsuario)
+        .then(
+            function (resultado) {
+                if (resultado.length > 0) {
+                    res.status(200).json(resultado);
+                } else {
+                    res.status(204).send("Nenhum resultado de saída encontrado!");
+                }
+            }
+        )
+}
+
+function pesquisarDashboar(req, res) {
+    const limite_linhas = 1;
+
+    var idUsuario = req.params.idUsuarioVar;
+
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    financeiroModel.pesquisarDashboar(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+// function atualizarCaixa(req, res) {
 //     var idUsuario = req.params.idUsuarioVar;
 
-//     financeiroModel.calcularCaixa(idUsuario)
+//     financeiroModel.atualizarCaixa(idUsuario)
 //         .then(
 //             function (resultado) {
 //                 if (resultado.length > 0) {
@@ -150,5 +185,7 @@ module.exports = {
     deleteItem,
     pesquisarEntradas,
     pesquisarSaidas,
-    // calcularCaixa
+    calcularCaixa,
+    pesquisarDashboar
+    // atualizarCaixa
 }

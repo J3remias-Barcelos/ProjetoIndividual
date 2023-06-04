@@ -3,39 +3,43 @@
     box-sizing: border-box;
     text-decoration: none;
     font-family: 'Poppins', sans-serif;
-    scrollbar-width: none;
 }
 
 html {
     font-size: 72.5%;
-    overflow: hidden;
-    scroll-behavior: smooth;
+    /* overflow: hidden; */
 }
 
 :root {
-    --bg--color: #2f0549;
+    --bg-color: #2f0549;
     --segunda-bg-color: #40004e;
     --terceira-bg-color: #323946;
     --text-color: #cbcbcb;
     --main-color: #b770ff;
-    --bg--color-fraco: #4c0677;
-    --bg--color-forte: #820ad1;
+    --bg-color-fraco: #4c0677;
+    --bg-color-forte: #820ad1;
 }
 
 .header {
     width: 100%;
     padding: 2rem;
-    background: var(--bg--color);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 25%, rgba(47, 5, 73, 1) 62%, rgba(64, 0, 78, 1) 95%);
     display: flex;
     justify-content: space-around;
     align-items: center;
+    box-shadow: 1px 0px 2px 0px var(--main-color);
+}
+
+body {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 25%, rgba(47, 5, 73, 1) 62%, rgba(64, 0, 78, 1) 95%);
+    color: var(--text-color);
 }
 
 .logo {
     font-size: 2.7rem;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
-    /* font-family: 'Noto Serif Telugu'; */
     color: var(--text-color);
     cursor: default;
 }
@@ -44,7 +48,7 @@ html {
     font-size: 1.7rem;
     color: var(--text-color);
     margin-left: 3rem;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 }
 
 .navbar a:hover,
@@ -59,136 +63,258 @@ html {
 }
 
 .pageContainer {
-    display: flex;
-    padding-top: 2rem;
-    gap: 13rem;
-    padding-bottom: 2rem;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 2px solid var(--bg--color-forte);
-    background-color: var(--bg--color-fraco);
-}
-
-.textContainers {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-    gap: 1rem;
-    font-family: 'Poppins', sans-serif;
-    color: var(--text-color);
-}
-
-.textTitle {
-    display: flex;
-    flex-direction: column;
-    width: 25rem;
-    font-family: 'Poppins', sans-serif;
-}
-
-.textSubtitle {
-    display: flex;
-    flex-direction: column;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--main-color);
-}
-
-/* .mainButton {
-    margin-top: 1rem;
-} */
-
-.sobreMimContainer {
-    display: flex;
-    height: 40rem;
-    flex-direction: row;
-    align-items: center;
-    gap: 8rem;
-    border-bottom: 2px solid var(--main-color);
-    background-color: var(--bg--color-fraco);
-}
-
-.sobreMimImg {
-    width: 32rem;
-    height: 30rem;
-    margin-left: 10rem;
-}
-
-.sobreMimText {
-    width: 38rem;
-    left: 38rem;
-    top: 14rem;
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    color: var(--main-color);
-    gap: 1rem;
-}
-
-.sobreMimText-tilulo {
-    font-family: 'Poppins', sans-serif;
-    color: var(--text-color);
-    font-weight: 700;
-    font-size: 2rem;
-}
-
-.myJobsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg--color-fraco);
-    border-bottom: 2px solid var(--main-color);
-}
-
-.myJobsTextContainer {
-    display: flex;
-    align-items: center;
-    gap: 5rem;
-}
-
-.jobsText {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 3rem;
-
-}
-
-.jobsText h1 {
-    font-family: 'Poppins', sans-serif;
-    color: var(--text-color);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 2rem;
-    margin-block-end: 3rem;
-}
-
-.jobsText p {
-    color: var(--text-color);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    height: 8rem;
-    width: 38rem;
-}
-
-.jobsImage {
-    height: 25rem;
-}
-
-.footerContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--bg--color-fraco);
-    border-top: 2px solid var(--main-color);
-    color: var(--text-color);
-}
-
-.footerMainContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
+    width: 90%;
+    height: 100%;
     margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-left: 6rem;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobreJeremy {
+    width: 100%;
+    height: 50rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobreJeremy .JeremyTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.sobreJeremy .JeremySubtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--main-color);
+}
+
+.fotoContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5rem;
+    padding: 1rem;
+}
+
+.fotoContainer img {
+    width: 45rem;
+    height: 45rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.fotoContainer img:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.sobreFamilia {
+    margin-top: 6rem;
+    width: 100%;
+    height: 60rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobreFamilia .FamiliaTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.sobreFamilia .FamiliaSubtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+}
+
+.fotoFamilia img {
+    width: 65rem;
+    height: 45rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.fotoFamilia img:hover {
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+
+.sobreCelula {
+    margin-top: 4rem;
+    width: 100%;
+    height: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sobreCelula .celulaTitle {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.sobreCelula .celulaSubtitle {
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.fotoCelula img {
+    width: 20rem;
+    height: 25rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.fotoCelula img:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.sobreCelula2 {
+    margin-top: 6rem;
+    width: 100%;
+    height: 63rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.celulaTitle2 h2 {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+}
+
+.videoJeremy {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.line {
+    position: relative;
+    width: 0px;
+    margin-right: 2rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.75);
+    font-size: 2.5rem;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Animação */
+.anim-typewriter {
+    animation: typewriter 4s steps(9) 5600ms infinite, blinkTextCursor 500ms steps(9) infinite normal;
+}
+
+@keyframes typewriter {
+    0% {
+        width: 0px;
+    }
+    10% {
+        width: 0px;
+    }
+    25% {
+        width: 180px;
+    }
+    75% {
+        width: 180px;
+    }
+    90% {
+        width: 0px;
+    }
+    100% {
+        width: 0px;
+    }
+}
+
+@keyframes blinkTextCursor {
+    from {
+        border-right-color: rgba(255, 255, 255, 0.75);
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
+
+.footer {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 25%, rgba(47, 5, 73, 1) 62%, rgba(64, 0, 78, 1) 95%);
+    color: var(--text-color);
+    padding: 2rem;
+    box-shadow: 1px 0px 2px 0px var(--main-color);
+}
+
+.footer-content {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.footer h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.footer p {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+.socials {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.socials li {
+    margin: 0 0.5rem;
+}
+
+.socials a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    background-color: var(--main-color);
+    color: var(--bg--color);
+    transition: 0.3s;
+    box-shadow: 1rem rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.socials a:hover {
+    background-color: var(--text-color);
+    color: var(--bg--color);
+}
+
+.socials a i {
+    font-size: 2.5rem;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 1.4rem;
 }
