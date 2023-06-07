@@ -1,14 +1,14 @@
 var database = require("../database/config")
 
-function listar() {
-    console.log("ACESSEI O FINANCEIRO MODEL LISTAR \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+// function listar() {
+//     console.log("ACESSEI O FINANCEIRO MODEL LISTAR \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
 
-    var instrucao = `
-        SELECT * FROM transacao;
-    `;
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
-}
+//     var instrucao = `
+//         SELECT * FROM transacao;
+//     `;
+//     console.log("Executando a instrução SQL: \n" + instrucao);
+//     return database.executar(instrucao);
+// }
 
 function listarPorUsuario(idUsuario) {
     console.log("ACESSEI O FINANCEIRO MODEL LISTA/USUARIO \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarPorUsuario()");
@@ -76,21 +76,43 @@ function calcularCaixa(idUsuario) {
     return database.executar(instrucao);
 }
 
-// function pesquisarDashboar(idUsuario) {
-//     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function pesquisarDashboards()");
-//     var instrucao = `
-//     SELECT (select sum(valor) FROM transacao  WHERE tipoValor = 'Entrada') as Entrada, 
-//     (SELECT sum(valor) as Valor FROM transacao  WHERE tipoValor = 'Saída') as Saída ,
-//     (select sum(valor) FROM transacao  WHERE tipoValor = 'Entrada')-(SELECT sum(valor) as Valor FROM transacao  WHERE tipoValor = 'Saída') as Total;
-//     `;
-//     console.log("Executando a instrução SQL: \n" + instrucao);
-//     return database.executar(instrucao);
-// }
+function pesquisarDashboar(idUsuario, limite_linhas) {
 
-// function atualizarCaixa(idUsuario) {
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = ``;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+    SELECT 
+        (SELECT SUM(valor) FROM transacao WHERE tipoValor = 'Entrada' AND fkusuario = usuario.idUser) AS Entrada,
+        (SELECT SUM(valor) FROM transacao WHERE tipoValor = 'Saída' AND fkusuario = usuario.idUser) AS Saída
+    FROM usuario
+    WHERE idUser = ${idUsuario} ;
+        `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+// function atualizarSaldoAtual(idUsuario) {
 //     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarCaixa()");
 //     var instrucao = `
-//     UPDATE transacao SET saldoAtual =  (SELECT sum(valor) as valorEntrada FROM transacao  WHERE tipoValor = 'Entrada') - (SELECT sum(valor) as valorSaida FROM transacao  WHERE tipoValor = 'Saída') FROM transacao WHERE fkUsuario = ${idUsuario};
+//     UPDATE transacao
+//     SET saldoAtual = (
+//         SELECT
+//             (SELECT SUM(valor) FROM transacao WHERE tipoValor = 'Entrada' AND fkusuario = usuario.idUser) -
+//             (SELECT SUM(valor) FROM transacao WHERE tipoValor = 'Saída' AND fkusuario = usuario.idUser)
+//         FROM usuario
+//         WHERE idUser = ${idUsuario}
+//     )
+//     WHERE fkUsuario = ${idUsuario};
+    
 //     `;
 //     console.log("Executando a instrução SQL: \n" + instrucao);
 //     return database.executar(instrucao);
@@ -98,12 +120,12 @@ function calcularCaixa(idUsuario) {
 
 module.exports = {
     cadastrarNaCarteira,
-    listar,
+    // listar,
     listarPorUsuario,
     deleteItem,
     pesquisarEntradas,
     pesquisarSaidas,
     calcularCaixa,
-    // pesquisarDashboar
-    // atualizarCaixa
+    pesquisarDashboar,
+    // atualizarSaldoAtual,
 };

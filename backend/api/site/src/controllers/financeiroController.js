@@ -41,19 +41,19 @@ function cadastrarNaCarteira(req, res) {
         }
 }
 
-function listar(req, res) {
-    financeiroModel.listar().then(function (resultado) {
-        if (resultado.length > 0) {
-            res.status(200).json(resultado);
-        } else {
-            res.status(204).send("Nenhum resultado encontrado!")
-        }
-    }).catch(function (erro) {
-        console.log(erro);
-        console.log("Houve um erro ao buscar os finances: ", erro.sqlMessage);
-        res.status(500).json(erro.sqlMessage);
-    });
-}
+// function listar(req, res) {
+//     financeiroModel.listar().then(function (resultado) {
+//         if (resultado.length > 0) {
+//             res.status(200).json(resultado);
+//         } else {
+//             res.status(204).send("Nenhum resultado encontrado!")
+//         }
+//     }).catch(function (erro) {
+//         console.log(erro);
+//         console.log("Houve um erro ao buscar os finances: ", erro.sqlMessage);
+//         res.status(500).json(erro.sqlMessage);
+//     });
+// }
 
 function listarPorUsuario(req, res) {
     var idUsuario = req.params.idUsuarioVar;
@@ -163,10 +163,10 @@ function pesquisarDashboar(req, res) {
     });
 }
 
-// function atualizarCaixa(req, res) {
+// function atualizarSaldoAtual(req, res) {
 //     var idUsuario = req.params.idUsuarioVar;
 
-//     financeiroModel.atualizarCaixa(idUsuario)
+//     financeiroModel.atualizarSaldoAtual(idUsuario)
 //         .then(
 //             function (resultado) {
 //                 if (resultado.length > 0) {
@@ -180,12 +180,12 @@ function pesquisarDashboar(req, res) {
 
 module.exports = {
     cadastrarNaCarteira,
-    listar,
+    // listar,
     listarPorUsuario,
     deleteItem,
     pesquisarEntradas,
     pesquisarSaidas,
     calcularCaixa,
-    pesquisarDashboar
-    // atualizarCaixa
+    pesquisarDashboar,
+    // atualizarSaldoAtual,
 }

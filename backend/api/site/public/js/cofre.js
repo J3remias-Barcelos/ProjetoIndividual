@@ -13,14 +13,15 @@ var listaControle = []; // AQUI É COMO SE EU MEU VETOR SÓ QUE VAZIO;
 
 setTimeout(() => atualizarFeed(), 1000);
 
-// AQUI É UMA FORMA NÃO COMUN, DE CRIAR UMA ARROW FUNCTION JÁ COM ONCLICK
+
+// MINHA ARROW FUNCTION JÁ COM ONCLICK
 btnNew.onclick = () => {
 
   if (descItem.value === "" || amount.value === "" || type.value === "") {
     return alert("Preencha todos os campos!");
   }
 
-  // MÉTODO PUSH É PARA INSERIR DADOS DENTRO DO MEU ARRAY/VETOR
+  // FORMA ANTIGA QUE EU ESTAVA USANDO PARA CADASTRAR NO BANCO
   listaControle.push({
     desc: descItem.value,
     amount: Number(amount.value).toFixed(2),
@@ -44,70 +45,59 @@ btnNew.onclick = () => {
   }).then(function (corpoListaCont) {
     if (corpoListaCont.ok) {
       console.log("Item inserido com sucesso!");
-      atualizarFeed();
+      window.location.reload();
     } else {
       console.log("Erro ao inserir item!");
     }
   }
   )
-  atualizarFeed();
+
 };
 
 function atualizarFeed() {
-  fetch(`/financeiro/listar/${idUsuarioVar}`).then(function (corpoListaContole) {
+  fetch(`/financeiro/listarUsuario/${idUsuarioVar}`).then(function (corpoListaContole) {
     corpoListaContole.json().then(function (corpoListaCont) {
 
       console.log(corpoListaCont);
 
       tbody.innerHTML = "";
-      
-        for (var i = 0; i < corpoListaCont.length; i++) {
+
+      for (var i = 0; i < corpoListaCont.length; i++) {
         var item = corpoListaCont[i];
-        // console.log("Verificando CorpoListaCont que está no ITEM: ", item);
+
+        // Verificar se o ID da transação já foi processado antes
+        if (transacoesProcessadas.has(item.idTransacao)) {
+          continue; // Pular para a próxima iteração se o ID já existe
+        }
+
+        // Adicionar o ID da transação ao conjunto de transações processadas
+        transacoesProcessadas.add(item.idTransacao);
+
         var trCorpo = document.createElement("tr");
 
         trCorpo.innerHTML = `
-          <td>${item.descricao}</td>
-          <td>R$ ${item.valor}</td>
-          <td class="columnType">${item.tipoValor === "Entrada"
+            <td>${item.descricao}</td>
+            <td>R$ ${item.valor}</td>
+            <td class="columnType">${item.tipoValor === "Entrada"
             ? '<i class="bx bx-check-circle"></i>'
             : '<i class="bx bx-x-circle"></i>'
           }</td>
-        <td class="columnAction">
-        <button class = "button-lixeira" onclick="deleteItem(${item.idTransacao})"><i class='bx bx-trash'></i></button>
-        </td>
-        `;
+            <td class="columnAction">
+              <button class="button-lixeira" onclick="deleteItem(${item.idTransacao})"><i class='bx bx-trash'></i></button>
+            </td>
+          `;
         tbody.appendChild(trCorpo);
         console.log("ID da Transação: ", item.idTransacao)
       }
     });
   });
-
   calculationSpan();
 }
 
-function deleteItem(idTransacao) {
-  // console.log("Criar função de apagar post escolhido - ID" + idTransacao);
-  fetch(`/financeiro/deleteItem/${idTransacao}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then(function (corpoListaCont) {
-    if (corpoListaCont.ok) {
-      console.log("Item apagado com sucesso!");
-      atualizarFeed();
-    } else {
-      console.log("Erro ao apagar item!");
-    }
-  }
-  )
-}
-
-async function calculationSpan() {
+function calculationSpan() {
   console.log("ID do Usuario: " + idUsuarioVar);
 
-  await fetch(`/financeiro/entradas/${idUsuarioVar}`).then(function (corpoListaContole) {
+  fetch(`/financeiro/entradas/${idUsuarioVar}`).then(function (corpoListaContole) {
     corpoListaContole.json().then(function (corpoListaCont) {
 
       console.log("Entradas: ", corpoListaCont);
@@ -116,7 +106,7 @@ async function calculationSpan() {
   }
   )
 
-  await fetch(`/financeiro/saidas/${idUsuarioVar}`).then(function (corpoListaContole) {
+  fetch(`/financeiro/saidas/${idUsuarioVar}`).then(function (corpoListaContole) {
     corpoListaContole.json().then(function (corpoListaCont) {
 
       console.log("Saidas: ", corpoListaCont);
@@ -125,30 +115,39 @@ async function calculationSpan() {
   }
   )
 
-  await fetch(`/financeiro/caixa/${idUsuarioVar}`).then(function (corpoListaContole) {
+  fetch(`/financeiro/caixa/${idUsuarioVar}`).then(function (corpoListaContole) {
     corpoListaContole.json().then(function (corpoListaCont) {
 
       console.log("Caixa: ", corpoListaCont);
       spanTotal.innerHTML = corpoListaCont[0].valorCaixa.toFixed(2);
     });
-    }
+  }
   )
-
-  // Além de buscar no Banco quero Inserir no campo (saldoAtual)
-  // fetch(`/financeiro/atualizarCaixa/${idUsuarioVar}`), {
-  //   method: "PUT",
-  //   headers: {
-  //     "Content-Type": "application/json"
-  //   }.then(function (corpoListaCont) {
-  //     if (corpoListaCont.ok) {
-  //       console.log("Item apagado com sucesso!");
-  //       atualizarFeed();
-  //     } else {
-  //       console.log("Erro ao apagar item!");
-  //     }
-  //     })
-  //     }
 }
+
+// USO PARA Criar um conjunto para armazenar os IDs das transações já processadas - (NÃO SÓ no DeleteItem, mas no AtualizarFeed para renderizar pelo ID)
+var transacoesProcessadas = new Set();
+
+function deleteItem(idTransacao) {
+  fetch(`/financeiro/deleteItem/${idTransacao}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then(function (corpoListaCont) {
+    if (corpoListaCont.ok) {
+      console.log("Item apagado com sucesso!");
+      // Remover o ID da transação do objeto de transações processadas
+      delete transacoesProcessadas[idTransacao];
+      atualizarFeed();
+    } else {
+      console.log("Erro ao apagar item!");
+    }
+  });
+
+  window.location.reload();
+}
+
 
 // setTimeout(() => {
 //   var total = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
@@ -156,8 +155,3 @@ async function calculationSpan() {
 //   console.log("Total: ", total);
 // }
 //   , 10000);
-
-
-// console.log((spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2));
-    // spanTotal.innerHTML = '';
-    // spanTotal.innerHTML = (spanEntrada.innerHTML - spanSaida.innerHTML).toFixed(2);
