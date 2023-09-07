@@ -102,7 +102,7 @@ function calculationSpan() {
 
       console.log("Entradas: ", corpoListaCont);
       spanEntrada.innerHTML = corpoListaCont[0].valorEntrada.toFixed(2);
-    });
+        });
   }
   )
 

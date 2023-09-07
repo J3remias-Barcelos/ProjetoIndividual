@@ -39,8 +39,8 @@ body {
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 25%, rgba(47,5,73,1) 62%, rgba(64,0,78,1) 95%);
     color: var(--text-color);
-    /* font-size: 1.6rem;
-    overflow: hidden; */
+    /* font-size: 1.6rem;*/
+    overflow-y: hidden;
 }
 
 .header {
@@ -66,15 +66,13 @@ body {
     color: var(--text-color);
     cursor: default;
 }
-/* .logo-project {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--text-color);
-    cursor: default;
-} */
 
 .span-cor {
     color: var(--main-color);
+}
+
+.span-cor:hover {
+    transform: translateX(10px);
 }
 
 .navbar a {
@@ -98,10 +96,10 @@ body {
 .navigation {
     margin-top: 8rem;
     position: relative;
-    height: 120rem;
     background: rgb(2,0,36);
     width: 66px;
-    box-shadow: 4px 0 0 var(--text-color);
+    height: 68rem;
+    box-shadow: 4px 0px 0 var(--text-color);
     border-left: 10px solid var(rgba(47,5,73,1));
     overflow-x: hidden;
     transition: 0.5s;
@@ -126,7 +124,6 @@ body {
     width: 100%;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-
 }
 
 .navigation ul li a {
@@ -196,22 +193,9 @@ body {
     box-shadow: 15px -15px 0 var(--text-color);
 }
 
-/* PARTE RESPONSÁVEL PELO CONTROLE FINANCEIRO */
-
-
-/* PARTE DO SITE QUE FICA O CONTROLE FINANCEIRO */
-
+/* PARTE DO SITE */
 .page-context {
     display:flex;
-}
-
-.cofre-context {
-    display: flex;
-    justify-content: ;
-    margin-top: 14rem;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
 }
 
 .page-context h1 {
@@ -220,78 +204,148 @@ body {
     color: var(--text-color);
 }
 
+.content {
+    width: 100%;
+    margin-top: 8rem;
+    padding: 4rem 7%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    align-content: flex-end;
+}
 
-.page-context .options {
+.content .graficos h2 {
+    font-size: 2.7rem;
+    width: 100%;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.graficos {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 2.3rem;
-    color: var(--text-color);
-    padding: 1rem 1rem;
-    box-shadow: 0px 0px 3px var(--main-color);
-}
-
-.options .entrada {
-    margin-right: 2rem;
-    cursor: pointer;
-}
-
-.options .saida {
-    margin-right: 2rem;
-    cursor: pointer;
-}
-
-.span-entrada {
-    color: #00C9A7;
-}
-
-.span-saida {
-    color: #FF3F34;
-}
-
-.span-total {
-    color: var(--main-color);
-    font-weight: 500;
-    
-}
-
-
-.form-exibir {
-    display: flex;
-    gap: 10px;
-    align-items: end;
-    width: 100%;
-    font-size: 2.5rem;
-    justify-content: center;
+    align-content: center;
     flex-wrap: wrap;
+
 }
 
-.form-exibir input {
-    width: 100%;
-    height: 34px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
+.content .graficos {
+    padding: 4rem;
+    margin-left: 7rem;
+    width: 101rem;
+    height: 45rem;
+    background: var(--bg--color);
+    opacity: 1.0;
+    border-radius: 20px;
+    box-shadow: rgb(0, 0, 0, 0.3) 0px 30px 30px -10px;
+    transition: 0.5s;  
 }
 
-.form-exibir #type {
-    width: 100%;
-    height: 34px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
+.content .graficos:hover {
+    transform: translateY(-10px);
 }
 
-.form-exibir .divDesc {
-    margin-top: 23px;
-}
+/* AQUI EU ALTERO PARTE INTERNA */
 
-.divDesc,
-.divType,
-.divAmount {
+.grafico-container {
+    width: 38rem;
+    height: 35rem;
     display: flex;
     flex-direction: column;
 }
 
-.form-exibir > button {
+.typesRentabilidade {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.typesRentabilidade select {
+    width: 12rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+}
+
+.input-taxa {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.input-taxa input {
+    width: 16rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.input-valorInicial {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.input-valorInicial input {
+    width: 16rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.input-aportes  {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.input-aportes input {
+    width: 16rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.input-duration {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.input-duration input {
+    width: 16rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--text-color);
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+#btnCalcular {
     background-color: var(--main-color);
     color: var(--bg--color);
     border: none;
@@ -299,91 +353,30 @@ body {
     border-radius: 5px;
     cursor: pointer;
     height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;    
 }
 
-.form-exibir > button:hover {
-    background-color: var(--terceira-bg-color);
-    color: var(--text-color);
-    border: var(--bg--color);
+#result {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 38rem;
+    height: 35rem;
+    background: var(--bg--color);
+    opacity: 1.0;
+    border-radius: 35px;
+    box-shadow: rgb(0, 0, 0, 0.3) 3px 30px 30px -10px;
+    transition: 0.5s;  
 }
 
-input,
-select {
-    padding: 5px;
-}
-
-.divTable {
-    width: 70rem;
-    height: 30rem;
-    font-size: 2rem;
-    margin: 10px 0px 20px 0px;
+#result .mostrarEmTela {
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-
-table {
-    flex-direction: column-reverse;
-    width: 100%;
-    padding: 20px 10px 0px 10px;
-    border-radius: 5px;
-}
-
-table tr {
-    width: 80px;
-    height: 5rem;
-    font-size: 2rem;
-    color: var(--text-color);
-    box-shadow: 0px 0px 3px var(--main-color);
-}
-
-th {
-    text-align: start;
-    border-bottom: inset;
-    padding: 5px;
-}
-
-i {
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-
-.button-lixeira{
-    background: transparent;
-}
-
-.bx-check-circle {
-    color: #00C9A7;
-}
-
-.bx-x-circle {
-    color: #FF3F34;
-}
-
-.columnAction {
-    width: 40px;
-    text-align: center;
-}
-
-.bx-trash {
-    color: var(--main-color);
-    background-color: var(--bg--color);
-}
-
-.columnAmount>button {
-    background: transparent;
-    border: none;
-}
-
-.columnAmount {
-    width: 30%;
-}
-
-.columnType {
-    width: 80px;
-    text-align: center;
-}
-
-
-
-
-

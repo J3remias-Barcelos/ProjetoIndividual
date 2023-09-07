@@ -11,6 +11,7 @@ list.forEach((item) =>
 window.onload = obterDadosControleFinanceiro;
 
 async function obterDadosControleFinanceiro() {
+  // try/cath - São usados para 
 try {
 const idUsuarioVar = sessionStorage.getItem("ID_USUARIO");
 const controlResponse = await fetch(`/financeiro/pesquisarDashboar/${idUsuarioVar}`, { cache: 'no-store' });
